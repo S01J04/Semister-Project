@@ -8,6 +8,7 @@ import Billboardrequest from "./components/Billboardrequest";
 import Province from "./components/Province";
 import { FooterFour } from "./components/Footer";
 import Ourclients from "./components/Ourclients";
+import UserReview from "./components/UserReview";
 function App() {
 
 
@@ -21,7 +22,7 @@ function App() {
       <Typeofbillboards/>
       <Billboardrequest/>
       <Province/>
-      
+      <UserReview/>
       <Ourclients/>
       <FooterFour/>
     </>

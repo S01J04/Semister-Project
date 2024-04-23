@@ -4,99 +4,212 @@ import { IoMdArrowDown } from "react-icons/io";
 import { IoIosMenu } from "react-icons/io";
 import { FaRegUserCircle, FaArrowRight } from "react-icons/fa";
 
-const Header = () => {
-    const [showCities, setShowCities] = useState(false);
-    const [showmenu, setShowmenu] = useState(false);
-    const [showregistry, setShowregistry] = useState(false);
 
-    const menuRef = useRef(null);
-    const registryRef = useRef(null);
 
-    const cityNames = ['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Hyderabad', 'Quetta', 'Peshawar', 'Sialkot'];
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target) && registryRef.current && !registryRef.current.contains(event.target)) {
-                setShowmenu(false);
-                setShowregistry(false);
-            }
-        };
-
-        if (showmenu || showregistry) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [showmenu, showregistry]);
-
+const DropdownList = ({ items }) => {
     return (
-        <>
-            <div className="relative transition-transform duration-300 ease-in-out transform ">
-                <div className="firstheader bg-blue-800 h-[30px] flex justify-between px-9 items-center text-white font-semibold">
-                    <div className="left flex">
-                        <div className="header-left-icons flex">
-                            {headerlefticons.map((item, index) => (
-                                <div key={index} className='flex mx-3 items-center'>
-                                    {React.createElement(item.icon, {
-                                        size: item.size,
-                                        color: item.color
-                                    })}
-                                    <span className='px-2 hidden md:block cursor-pointer'>{item.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="right flex">
-                        {headerrighticons.map((item, index) => (
-                            <div key={index} className="icon-container px-2 cursor-pointer">
-                                {React.createElement(item.icon, {
-                                    size: item.size,
-                                    color: item.color
-                                })}
-                            </div>
+      <ul className="absolute sm:w-[120%] sm:top-full  top-20 w-[40%] left-[200px] sm:left-0 z-10 bg-gray-200 shadow-lg">
+        {items.map((item) => (
+          <li key={item} className="px-4 text-start border-b border-gray-300 py-3 text-gray-400 hover:bg-gray-100">
+            <a href={`#${item}`} className="text-gray-500 text-sm">
+              {item}
+            </a>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+
+export default function Header() {
+    const [showCities, setShowCities] = useState(false);
+    const [showProvinces, setShowProvinces] = useState(false);
+    const menuItems = [
+        {
+          name: 'Explore Billboards',
+          href: '#',
+          hover: <ChevronDown className="ml-2 h-4 w-4" />,
+          onMouseEnter: () => setShowProvinces(true),
+          onMouseLeave: () => setShowProvinces(false),
+          items: ['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Hyderabad', 'Quetta', 'Peshawar', 'Sialkot']
+        },
+        {
+          name: 'BillBoards on Map',
+          href: '#',
+        },
+        {
+          name: 'Search by City',
+          href: '#',
+          hover: <ChevronDown className="ml-2 h-4 w-4" />,
+          onMouseEnter: () => setShowCities(true),
+          onMouseLeave: () => setShowCities(false),
+          items: ['KPK', 'PUNJAB', 'SINDH', 'BALOCHISTAN', 'AZADKASHMIR']
+        },
+        {
+          name: 'About Us',
+          href: '#',
+        },
+        {
+          name: 'Contact Us',
+          href: '#',
+        },
+      ];
+   
+
+   
+    
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  return (
+    <div>
+    <div className="firstheader bg-blue-800 h-[30px] flex justify-between px-9 items-center text-white font-semibold">
+                   <div className="left flex">
+                       <div className="header-left-icons flex">
+                           {headerlefticons.map((item, index) => (
+                               <div key={index} className='flex mx-3 items-center'>
+                                   {React.createElement(item.icon, {
+                                       size: item.size,
+                                       color: item.color
+                                   })}
+                                  <span className='px-2 hidden md:block cursor-pointer'>{item.name}</span>
+                              </div>
                         ))}
                     </div>
                 </div>
-                <div className=" z-10 secondheader flex h-[79px] items-center md:justify-evenly justify-between px-5 md:px-0">
-                    <div className='block md:hidden cursor-pointer' onClick={() => setShowmenu(!showmenu)}>
-                        <IoIosMenu size={25} />
-                    </div>
-                    <div className='text-4xl font-bold cursor-pointer'>AdBuq</div>
-                    <div ref={menuRef} className={`${showmenu ? 'absolute h-screen text-md font-bold text-gray-600 bg-slate-100 left-0 block top-0 px-5 py-5 w-[270px] border ' : 'relative left-[-150]  md:flex flex text-md justify-evenly w-[60%]'}`} style={{ zIndex: 60 }}>
-                        <div className='flex m items-center relative' onMouseEnter={() => setShowCities(true)} onMouseLeave={() => setShowCities(false)}>
-                            <div className={`${showmenu ? 'flex items-center relative py-3 border-b-2 cursor-pointer' : 'cursor-pointer flex items-center relative'}`}> EXPLORE BILLBOARDS <span className='p-1'>{showmenu ? <FaArrowRight size={15} /> : <IoMdArrowDown />}</span></div>
-                            {showCities && (
-                                <div style={{ zIndex: 65 }} className={`${showmenu ? 'absolute top-0 left-[140%] transform -translate-x-1/2' : ' absolute top-6 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow'}`}>
-                                    {cityNames.map((city, index) => (
-                                        <div key={index} className='border-b-2 cursor-pointer hover:bg-slate-300 border-gray-300 w-[180px]  text-lg px-3 bg-gray-100 py-2'>{city}</div>
-                                    ))}
-                                </div>
-                            )}
+                   <div className="right flex"> {headerrighticons.map((item, index) => (
+                        <div key={index} className="icon-container px-2 cursor-pointer">
+                            {React.createElement(item.icon, {
+                                size: item.size,
+                                color: item.color
+                            })}
                         </div>
-                        <div className={`${showmenu ? 'py-3 border-b-2 cursor-pointer' : 'cursor-pointer'}`}>BILLBOARDS ON MAP</div>
-                        <div className={`${showmenu ? 'py-3 border-b-2 flex items-center cursor-pointer' : 'cursor-pointer flex items-centerborder'}`}>TOOLS <span className='p-1'>{showmenu ? <FaArrowRight size={15} /> : <IoMdArrowDown />}</span></div>
-                        <div className={`${showmenu ? 'py-3 border-b-2 cursor-pointer' : 'cursor-pointer'}`}>CONTACT US</div>
-                        <div className={`${showmenu ? 'py-3 border-b-2 cursor-pointer' : 'cursor-pointer'}`}>ABOUT US</div>
-                    </div>
-                    <div className='block md:hidden cursor-pointer' ref={registryRef} onClick={()=>setShowregistry(!showregistry)}>
-                        <FaRegUserCircle size={25} color='purple' />
-                    </div>
-                    <div className={`${showregistry?'absolute h-screen text-md font-bold text-gray-600 bg-slate-100 right-0 block top-0 px-5 py-5 w-[270px] border border-black':'text-gray-500  md:flex flex text-sm'}`} style={{ zIndex: 60 }}>
-                        <div className={`${showregistry?'Register py-3 border-b-4 cursor-pointer':'px-2 cursor-pointer'}`}>
-                            LOGIN
-                        </div>
-                        <div className={`${showregistry?'Register py-3 border-b-4 cursor-pointer':'px-2 cursor-pointer'}`}>
-                            REGISTER
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
-        </>
-    );
+    <div className='relative py-3 border shadow-md shadow-black   flex items-center justify-between px-10 '>
+       <div className='flex items-center '>
+        <div className='text-xl text-black-600 font-bold mx-5'>Shah Advertizing</div>
+        <div>
+      <input
+        class=" h-10 w-[250px] hidden sm:block outline-none border-none  rounded-md bg-gray-100 px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+        type="text"
+        placeholder="Serach"
+      />
+    </div>
+       </div>
+       <div>
+       <div class="hidden text-white space-x-2 lg:block">
+      <button
+        type="button"
+        class="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+      >
+        Sign In
+      </button>
+      <button
+        type="button"
+        class="rounded-md  px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+      >
+        Log In
+      </button>
+    </div>
+       </div>
+    </div>
+      <div className=" relative   w-[100%] bg-white">
+      <div className="mx-auto   flex h-full  items-center justify-between px-4 ">
+      <div className="hidden w-[100vw] h-full items-start sm:flex">
+        <ul className="flex items-center h-full justify-center w-full relative">
+          {menuItems.map((item) => (
+            <li
+              onMouseEnter={item.onMouseEnter}
+              onMouseLeave={item.onMouseLeave}
+              className="w-[190px] relative h-full text-center text-nowrap hover:bg-blue-600 hover:text-white text-black py-4"
+              key={item.name}
+            >
+              <a href={item.href} className="inline-flex items-center text-sm font-semibold">
+                {item.name}
+                <span className="ml-2">{item.hover}</span>
+                {((item.name === 'Explore Billboards' && showProvinces) || (item.name === 'Search by City' && showCities)) && <DropdownList items={item.items} />}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+        <div className="py-4 absolute bottom-0 sm:hidden">
+          <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
+        </div>
+        {isMenuOpen && (
+          <div className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition lg:hidden">
+            <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="px-5 pb-6 pt-5">
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center space-x-2">
+                    <span>
+                    <input
+        class="flex h-10 w-[250px]    outline-none border-none  rounded-md bg-gray-200 px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+        type="text"
+        placeholder="Serach"
+      />
+                    </span>
+              
+                  </div>
+                  <div className="-mr-2">
+                    <button
+                      type="button"
+                      onClick={toggleMenu}
+                      className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                      <span className="sr-only">Close menu</span>
+                      <X className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <nav className="grid gap-y-4">
+                    {menuItems.map((item) => (
+                      <a
+                       onMouseEnter={item.onMouseEnter}
+              onMouseLeave={item.onMouseLeave}
+                        key={item.name}
+                        href={item.href}
+                        className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
+                      >
+                        <span className="ml-3 text-base font-medium text-gray-900">
+                          {item.name}
+                        </span>
+                        <span>
+                          {item.hover}
+                        </span>
+                        {((item.name === 'Explore Billboards' && showProvinces) || (item.name === 'Search by City' && showCities)) && <DropdownList items={item.items} />}
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+                <div className="mt-2 space-y-2">
+                  <button
+                    type="button"
+                    className="w-full rounded-md  border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    type="button"
+                    className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    Log In
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+    </div>
+  )
 }
-
-export default Header;
