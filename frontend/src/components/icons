@@ -1,0 +1,24 @@
+import { CiPhone } from "react-icons/ci";
+import { CiMail } from "react-icons/ci";
+import { CiFacebook } from "react-icons/ci";
+import { BsTwitterX } from "react-icons/bs";
+import { FaWhatsapp } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { AiOutlineYoutube } from "react-icons/ai";
+
+export const headerlefticons = [
+    { icon: CiPhone, name: "+92 331 020 1113", color: '#ffffff',size:20 ,altName: '+92 331 020 1113'},
+    { icon: CiMail, name: "@MuhammadSohaib.com", color: '#ffffff',size:20 ,altName: '@MuhammadSohaib.com' },
+]
+   
+ 
+
+export const headerrighticons = [
+    { icon: CiFacebook, size: 20, color: '#ffffff' },
+    { icon: BsTwitterX, size: 20, color: '#ffffff' },
+    { icon: FaWhatsapp, size: 20, color: '#ffffff' },
+    { icon: FaLinkedinIn, size: 20, color: '#ffffff' },
+    { icon: FaInstagram, size: 20, color: '#ffffff' },
+    { icon: AiOutlineYoutube, size: 20, color: '#ffffff' }
+];

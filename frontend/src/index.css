@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+   background-color: rgb(231, 227, 221);
+}
+.contactus {
+  color: white;
+  position: relative; /* Set position to relative so ::after can be positioned relative to this */
+  background-image: url('https://seeblindspot.com/wp-content/uploads/2021/08/LA-3.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+/* .contactus::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.418); /* Dark overlay with 50% opacity */
+/* } */
+.contactus input{ 
+  width: 230px;
+  padding: 10px 0;
+   margin-right: 30px;
+   padding-left: 10px ;
+   border-radius: 10px;
+
+}
+.bg{
+background-image: url('https://img.pikbest.com/wp/202347/nighttime-mockup-empty-billboard-in-3d-rendering-with-dark-sky-background_9756858.jpg!sw800');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+.bgc{
+  background-color: rgba(0, 0, 255, 0.37);
+}
+
+@media screen and (max-width: 640px) {
+
+  .contactus input{ 
+    width: 200px;
+    padding: 5px 0;
+ 
+     padding-left: 10px ;
+     border-radius: 10px;
+  
+  }
+
+}
