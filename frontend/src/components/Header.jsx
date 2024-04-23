@@ -66,13 +66,13 @@ const Header = () => {
                         <IoIosMenu size={25} />
                     </div>
                     <div className='text-4xl font-bold cursor-pointer'>AdBuq</div>
-                    <div ref={menuRef} className={`${showmenu ? 'absolute h-screen text-md font-bold text-gray-600 bg-slate-100 left-0 block top-0 px-5 py-5 w-[270px] border ' : 'relative left-[-150] hidden md:flex flex text-md justify-evenly w-[60%]'}`} style={{ zIndex: 60 }}>
+                    <div ref={menuRef} className={`${showmenu ? 'absolute h-screen text-md font-bold text-gray-600 bg-slate-100 left-0 block top-0 px-5 py-5 w-[270px] border ' : 'relative left-[-150]  md:flex flex text-md justify-evenly w-[60%]'}`} style={{ zIndex: 60 }}>
                         <div className='flex m items-center relative' onMouseEnter={() => setShowCities(true)} onMouseLeave={() => setShowCities(false)}>
                             <div className={`${showmenu ? 'flex items-center relative py-3 border-b-2 cursor-pointer' : 'cursor-pointer flex items-center relative'}`}> EXPLORE BILLBOARDS <span className='p-1'>{showmenu ? <FaArrowRight size={15} /> : <IoMdArrowDown />}</span></div>
                             {showCities && (
                                 <div style={{ zIndex: 65 }} className={`${showmenu ? 'absolute top-0 left-[140%] transform -translate-x-1/2' : ' absolute top-6 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow'}`}>
                                     {cityNames.map((city, index) => (
-                                        <div key={index} className='border-b-2 cursor-pointer hover:bg-slate-300 border-gray-300 w-[180px] text-xs text-lg px-3 bg-gray-100 py-2'>{city}</div>
+                                        <div key={index} className='border-b-2 cursor-pointer hover:bg-slate-300 border-gray-300 w-[180px]  text-lg px-3 bg-gray-100 py-2'>{city}</div>
                                     ))}
                                 </div>
                             )}
@@ -85,7 +85,7 @@ const Header = () => {
                     <div className='block md:hidden cursor-pointer' ref={registryRef} onClick={()=>setShowregistry(!showregistry)}>
                         <FaRegUserCircle size={25} color='purple' />
                     </div>
-                    <div className={`${showregistry?'absolute h-screen text-md font-bold text-gray-600 bg-slate-100 right-0 block top-0 px-5 py-5 w-[270px] border border-black':'text-gray-500 hidden md:flex flex text-sm'}`} style={{ zIndex: 60 }}>
+                    <div className={`${showregistry?'absolute h-screen text-md font-bold text-gray-600 bg-slate-100 right-0 block top-0 px-5 py-5 w-[270px] border border-black':'text-gray-500  md:flex flex text-sm'}`} style={{ zIndex: 60 }}>
                         <div className={`${showregistry?'Register py-3 border-b-4 cursor-pointer':'px-2 cursor-pointer'}`}>
                             LOGIN
                         </div>

@@ -9,7 +9,10 @@ const Contactus = () => {
                 <div className='md:text-xl text-lg py-3'>Fill up the form here below. Our team will get in touch with you</div>
             </div>
             <div className='md:flex grid grid-cols-2 px-6  md:flex-row gap-5 '>
-                <input type="text " className='placeholder:text-gray-600 ' placeholder='Name'/><input type="text" className='placeholder:text-gray-600' placeholder='Email'/><input className='placeholder:text-gray-600' type="text" placeholder='Phone' /> <button className=' md:w-[230px] rounded-lg  bg-blue-700'>Get More Information</button>
+                <input type="text " className='placeholder:text-gray-600 ' placeholder='Name'/><input type="text" className='placeholder:text-gray-600' placeholder='Email'/><input className='placeholder:text-gray-600' type="text" placeholder='Phone' /> <button className='md:w-[230px] rounded-lg bg-blue-700 hover:bg-blue-800 duration-300 cursor-pointer'>
+  Get More Information
+</button>
+
             </div>
             <div className=' md:flex md:flex-row grid grid-cols-2 gap-x-10 px-5 mt-5 ml-10 mb-5 w-full md:ustify-between'>
                 <div className='font-bold text-md w-60'>You can call our local WhatsApp number to get more information</div>
