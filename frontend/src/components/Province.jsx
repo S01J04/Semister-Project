@@ -7,7 +7,7 @@ const Province = () => {
         <span className='text-2xl'>Explore Billboards In All Provinces/States</span><br />
         We have presence all over Pakistan.
       </div>
-      <div className='h-[80vh] rounded-lg'>
+      <div className='h-[80vh] rounded-lg '>
         <img
           src="https://ahgroup-pk.com/blog/wp-content/uploads/2023/08/punjab-provinces-of-pakistan-ahgroup-pk-1024x682.jpg"
           alt=""
