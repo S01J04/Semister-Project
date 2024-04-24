@@ -7,13 +7,11 @@ import Contactus from "./components/Contactus";
 import Typeofbillboards from "./components/typeofbillboards";
 import Billboardrequest from "./components/Billboardrequest";
 import Province from "./components/Province";
-import { FooterFour } from "./components/Footer";
 import Ourclients from "./components/Ourclients";
 import UserReview from "./components/UserReview";
 const HomePage = () => {
   return (
     <>
-      <Header  />
       <Body_search/>
       <Discoverbillboards/>
       <Vediopage/>
@@ -23,7 +21,7 @@ const HomePage = () => {
       <Province/>
       <UserReview/>
       <Ourclients/>
-      <FooterFour/>
+
     </>
   )
 }

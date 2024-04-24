@@ -7,6 +7,7 @@ import { FaRegUserCircle, FaArrowRight } from "react-icons/fa";
 
 
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom';
 
 const DropdownList = ({ items }) => {
     return (
@@ -14,6 +15,7 @@ const DropdownList = ({ items }) => {
         {items.map((item) => (
           <li key={item} className="px-4 text-start border-b border-gray-300 py-3 text-gray-400 hover:bg-gray-100">
             <a href={`#${item}`} className="text-gray-500 text-sm">
+    
               {item}
             </a>
           </li>
@@ -27,9 +29,13 @@ export default function Header() {
     const [showCities, setShowCities] = useState(false);
     const [showProvinces, setShowProvinces] = useState(false);
     const menuItems = [
+      {
+        name: 'Home',
+        href: '/',
+      },
         {
           name: 'Explore Billboards',
-          href: '#',
+          href: '/location',
           hover: <ChevronDown className="ml-2 h-4 w-4" />,
           onMouseEnter: () => setShowProvinces(true),
           onMouseLeave: () => setShowProvinces(false),
@@ -49,11 +55,11 @@ export default function Header() {
         },
         {
           name: 'About Us',
-          href: '#',
+          href: '/about',
         },
         {
           name: 'Contact Us',
-          href: '#',
+          href: '/contact',
         },
       ];
    
@@ -105,18 +111,23 @@ export default function Header() {
        </div>
        <div>
        <div class="hidden text-white space-x-2 lg:block">
+      <Link to={`/login`}>
       <button
         type="button"
         class="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
       >
         Sign In
       </button>
+      </Link>
+      <Link to={`/login`}>
       <button
         type="button"
         class="rounded-md  px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
       >
-        Log In
+        Register
       </button>
+      </Link>
+     
     </div>
        </div>
     </div>
@@ -125,18 +136,18 @@ export default function Header() {
       <div className="hidden w-[100vw] h-full items-start sm:flex">
         <ul className="flex items-center h-full justify-center w-full relative">
           {menuItems.map((item) => (
-            <li
+            <Link to={item.href} className="">  <li
               onMouseEnter={item.onMouseEnter}
               onMouseLeave={item.onMouseLeave}
-              className="w-[190px] relative h-full text-center text-nowrap hover:bg-blue-600 hover:text-white text-black py-4"
+              className="w-[190px] relative h-full inline-flex justify-center items-center text-sm font-semibold text-center text-nowrap hover:bg-blue-600 hover:text-white text-black py-4"
               key={item.name}
             >
-              <a href={item.href} className="inline-flex items-center text-sm font-semibold">
+              
                 {item.name}
                 <span className="ml-2">{item.hover}</span>
                 {((item.name === 'Explore Billboards' && showProvinces) || (item.name === 'Search by City' && showCities)) && <DropdownList items={item.items} />}
-              </a>
-            </li>
+             
+            </li> </Link>
           ))}
         </ul>
       </div>
