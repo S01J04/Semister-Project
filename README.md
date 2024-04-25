@@ -1,5 +1,3 @@
-Sure, here's a note you can use for your GitHub README or any other platform:
-
 ---
 
 # Shah Advertizing - Taking Offline Billboard Advertising Online
