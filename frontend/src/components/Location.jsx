@@ -1,10 +1,15 @@
 
 import React from 'react'
+import Locationheader from './Locationheader'
+import Path from './path.jsx'
+import Products from './Products.jsx'
 
 const Location = () => {
   return (
     <div>
-      Hey Iam Location
+      <Locationheader/>
+      <Path/>
+      <Products/>
     </div>
   )
 }
