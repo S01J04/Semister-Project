@@ -1,17 +1,19 @@
-
-import React from 'react'
-import Locationheader from './Locationheader'
-import Path from './path.jsx'
-import Products from './Products.jsx'
+import React, { useState } from 'react';
+import Locationheader from './Locationheader';
+import Path from './path.jsx';
+import Products from './Products.jsx';
 
 const Location = () => {
+  const [searchproduct, setSearchproducts] = useState(''); 
+  console.log(searchproduct);
+
   return (
     <div>
-      <Locationheader/>
-      <Path/>
-      <Products/>
+      <Locationheader setSearchproduct={setSearchproducts} />
+      <Path />
+      <Products SearchQuery={searchproduct} />
     </div>
-  )
-}
+  );
+};
 
-export default Location
+export default Location;
