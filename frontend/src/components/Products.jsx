@@ -2,22 +2,46 @@ import React from "react";
 import Product from "./Product";
 import { MdOutlineFormatListBulleted } from "react-icons/md";
 import { LuArrowUpDown } from "react-icons/lu";
+import products from "./billboards";
 
-import products from './billboards'
-
-
-const Products = ({ SearchQuery }) => {
-  // Filter products based on the search query
+const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie }) => {
+ 
   const filteredProducts = products.filter((product) => {
-    const productName = product.city.toLowerCase();
+    const productName = (product.city || "").toLowerCase();
+    const locationDescription = (product.locationDescription || "").toLowerCase();
+    const availability = (product.availability || "").toLowerCase();
+    const size = (product.size || "").toLowerCase();
+    const price = (product.price || "").toLowerCase();
     const query = SearchQuery.toLowerCase();
 
-    // Return true if the product name includes the search query or if the search query is empty
-    return productName.includes(query) || !query;
-  });
+    // Check if the product matches the search query or if the query is empty
+    const matchesSearchQuery = query
+      ? productName.includes(query) ||
+        locationDescription.includes(query) ||
+        availability.includes(query) ||
+        size.includes(query) ||
+        price.includes(query)
+      : true;
+
+    // Check if the product matches the selected availability, type, cities, and size
+    const matchesSelectedItems =
+      (!aavailability || aavailability.toLowerCase() === product.availability.toLowerCase()) &&
+      (!ttype || ttype.toLowerCase() === product.type.toLowerCase()) &&
+      (!ccites || ccites.toLowerCase() === product.city.toLowerCase()) &&
+      (!szie || szie.toLowerCase() === product.size.toLowerCase());
+
+    // Return true if the product matches the search query and all selected items
+    return matchesSearchQuery && matchesSelectedItems;
+});
+
+  
+
+  
+  console.log(filteredProducts)
+  
 
   return (
-    <div className=" mx-auto w-[80%] ">
+    <div className="mx-auto w-[80%]">
       <div className="grid grid-cols-2 mt-10 my-4 justify-between items-center ">
         <div className="text-4xl font-bold">Search Results</div>
         <div className="flex justify-end">
@@ -32,13 +56,11 @@ const Products = ({ SearchQuery }) => {
               Default Order <LuArrowUpDown />
             </div>
           </span>
-          <div className="px-5 py-2 text-white rounded bg-purple-900">
-            Save Search
-          </div>
+          <div className="px-5 py-2 text-white rounded bg-purple-900">Save Search</div>
         </div>
       </div>
 
-      <div className="grid   md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
+      <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
         {filteredProducts.map((product, index) => (
           <Product
             key={index}
