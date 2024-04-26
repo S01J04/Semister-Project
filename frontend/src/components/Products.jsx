@@ -50,6 +50,7 @@ const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie }) => {
         </div>
         <div>{filteredProducts.length} Results Found</div>
         <div className="flex gap-4 items-center justify-end">
+<<<<<<< HEAD
           <span className="flex items-center gap-2 ">
             Sorted by:{" "}
             <div className="text-gray-400 flex items-center gap-3 ">
@@ -62,6 +63,17 @@ const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie }) => {
 
       <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
         {filteredProducts.map((product, index) => (
+=======
+          <span className="flex items-center gap-2 ">Sorted by: <div className="text-gray-400 flex items-center gap-3 ">Default Order <LuArrowUpDown /></div></span>
+          <div className='bg-transparent  px-5 py-2 rounded cursor-pointer'>
+        <button className="text-white bg-purple-900 rounded px-5 py-2 hover:bg-green-900">Save Search</button>
+      </div>
+      </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
+        {products.map((product, index) => (
+>>>>>>> 5f71f66ba45a55480cdc60b8b3a9f15c27f215ae
           <Product
             key={index}
             _id={product._id}

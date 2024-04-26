@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
+=======
+import React from 'react';
+>>>>>>> 5f71f66ba45a55480cdc60b8b3a9f15c27f215ae
 import { LuChevronsUpDown } from "react-icons/lu";
 import products from './billboards';
 
@@ -91,6 +95,7 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
   return (
     <div className='flex items-center bg-blue-600 gap-x-4 justify-center py-2'>
       <div>
+<<<<<<< HEAD
         <input
           className='border-none outline-none rounded w-[350px] px-4 py-2'
           value={searchQuery}
@@ -121,4 +126,21 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
   );
 };
 
+=======
+        <input className='border-none outline-none rounded w-[350px] px-4 py-2' type="text" placeholder='Enter Road or Area Name' />
+      </div>
+      <div>
+        <div className='bg-white py-2 px-7 rounded flex items-center justify-between cursor-pointer hover:bg-gray-200'>Availability <div><LuChevronsUpDown /></div></div>
+      </div>
+      <div className='bg-white py-2 px-4 rounded cursor-pointer hover:bg-gray-200'><div>Type</div></div>
+      <div className='bg-white py-2 px-7 rounded flex items-center now justify-between cursor-pointer hover:bg-gray-200'><div className=''>All cities</div><div><LuChevronsUpDown /></div></div>
+      <div className='bg-white py-2 px-6 rounded flex items-center justify-between cursor-pointer hover:bg-gray-200'><div>Size</div><div><LuChevronsUpDown /></div></div>
+      <div className='bg-transparent border py-2 px-10 rounded cursor-pointer group hover:bg-green-900'>
+        <button className="text-white group-hover:text-white">Search</button>
+      </div>
+    </div>
+  );
+};
+
+>>>>>>> 5f71f66ba45a55480cdc60b8b3a9f15c27f215ae
 export default Locationheader;
