@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { LuChevronsUpDown } from "react-icons/lu";
 import products from './billboards';
 
-const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,setsszie }) => {
+const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,setsszie,handlesearch }) => {
   const [availability, setAvailability] = useState(false);
   const [type, setType] = useState(false);
   const [cities, setCities] = useState(false);
@@ -77,7 +77,6 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
     setttype(selectedItemss.Type)
     setccites(selectedItemss.AllCities)
     setsszie(selectedItemss.Size)
-    
     setSearchQuery('')
     setSelectedItemss({
       Availability: null,

@@ -3,9 +3,12 @@ import Locationheader from './Locationheader';
 import Path from './path.jsx';
 import Products from './Products.jsx';
 
-const Location = () => {
-  const [searchproduct, setSearchproducts] = useState('');
 
+
+
+const Location = () => {
+ 
+  const [searchproduct, setSearchproducts] = useState('');
   const [aavailability, setaavailability] = useState('')
   const [ttype, setttype] = useState('')
   const [ccities, setccities] = useState('')

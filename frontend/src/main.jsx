@@ -9,6 +9,7 @@ import AdminPage from "./components/AdminPage.jsx";
 import Contact from "./components/Contact.jsx";
 import About from './components/About.jsx';
 import Location from './components/Location.jsx';
+import Specificlocation from './components/Specificlocation.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="location" element={<Location />} />
+          <Route path="specificlocation" element={<Specificlocation />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<AdminPage />} />
