@@ -2,7 +2,7 @@ import React from 'react';
 
 const Ourclients = () => {
   return (
-    <div className='min-h-[100vh] flex my-10 flex-col items-center justify-center'>
+    <>
       <div className='text-3xl my-10'>OUR PARTNERS</div>
       <div className='grid w-[70%] mx-auto gap-10 grid-cols-2 md:grid-cols-4'>
         <div className='h-[130px] bg-transparent cursor-pointer'>
@@ -38,7 +38,7 @@ const Ourclients = () => {
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAU28OupNBoVccgfCXa6mu2AVCCMYMevTUHxpTo71JOQ&s" className='h-full w-[130px] object-cover mix-blend-multiply hover:scale-110 transform transition-transform duration-300' alt="" />
         </div>
       </div>
-    </div>
+  </>
   );
 };
 
