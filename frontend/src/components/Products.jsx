@@ -62,12 +62,12 @@ const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie ,storebillbo
           <Product
             key={index}
             _id={product._id}
-            img={product.img}
+            img={product.imgpath}
             name={product.name}
             city={product.city.name}
-            locationDescription={product.locationDescription}
+            locationDescription={product.name}
             availability={product.availability}
-            size={product.size}
+            size={product.dimensions}
             price={product.price}
           />
         ))}

@@ -15,20 +15,23 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
   });
   console.log(storebillboards.availability)
  
-  let checkavailability;
-  const city = storebillboards.map((item, index) => {
-    checkavailability=item.availability
-    return item.city.name;
-  });
+  const city = storebillboards.map((item) => {
+  return item.city.name;
+});
+
+const uniqueCities = [...new Set(city)];
+
+
+
   
-   console.log(checkavailability)
+
   const menuItems = [
     {
       name: 'Availability',
       hover: <LuChevronsUpDown />,
       toggleState: availability,
       setToggleState: setAvailability,
-      items: checkavailability
+      items: ["Available","Unavailable","Reserved","Booked"]
     },
     {
       name: 'Type',
@@ -42,7 +45,7 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
       hover: <LuChevronsUpDown />,
       toggleState: cities,
       setToggleState: setCities,
-      items: city
+      items: uniqueCities
     },
     {
       name: 'Size',

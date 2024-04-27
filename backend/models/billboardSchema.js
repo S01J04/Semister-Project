@@ -1,9 +1,14 @@
 // models/Billboard.js
 import mongoose from 'mongoose';
 
+const { Schema } = mongoose;
 
-const billboardSchema = new mongoose.Schema({
+const billboardSchema = new Schema({
   name: {
+    type: String,
+    required: true
+  }, 
+  description: {
     type: String,
     required: true
   }, 
@@ -11,8 +16,8 @@ const billboardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-   availability: {
-    type: [String],
+  availability: {
+    type: String,
     required: true,
     default: "available"
   },
@@ -31,6 +36,7 @@ const billboardSchema = new mongoose.Schema({
   location: {
     type: {
       type: String,
+      enum: ['Point'], // Only accept 'Point' as the type
       required: true
     },
     coordinates: {
@@ -39,12 +45,12 @@ const billboardSchema = new mongoose.Schema({
     }
   },
   city: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'City',
     required: true
   },
   province: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Province',
     required: true
   },

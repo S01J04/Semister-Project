@@ -218,13 +218,25 @@ export const deleteBillboard = async (req, res) =>{
 // Controller function to insert a new billboard
 export const insertBillboard = async (req, res) => {
     try {
-      const { name, availability,imgpath,type, dimensions, price, location, city, province } = req.body;
+      const { name, description, availability, imgpath, type, dimensions, price, location, city, province } = req.body;
       
       // Check for missing required fields
-      if (!name || !availability || !dimensions ||!imgpath||!type|| !price || !location || !city || !province) {
+      if (!name || !description || !availability || !dimensions || !imgpath || !type || !price || !location || !city || !province) {
         return res.status(400).json({ 
           success: false,
           message: "Please provide all the required input fields." 
+        });
+      }
+  
+      // Check if a billboard with the same name or location already exists
+      const existingBillboard = await Billboard.findOne({ 
+        name: name,
+        'location.coordinates': location.coordinates
+      });
+      if (existingBillboard) {
+        return res.status(409).json({ 
+          success: false,
+          message: "A billboard with the same name or location already exists." 
         });
       }
   
@@ -243,6 +255,7 @@ export const insertBillboard = async (req, res) => {
       // Create a new Billboard document
       const newBillboard = new Billboard({
         name, 
+        description,
         imgpath,
         availability,
         type,
@@ -269,3 +282,4 @@ export const insertBillboard = async (req, res) => {
       });
     }
   };
+  
