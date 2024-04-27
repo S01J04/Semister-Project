@@ -218,10 +218,10 @@ export const deleteBillboard = async (req, res) =>{
 // Controller function to insert a new billboard
 export const insertBillboard = async (req, res) => {
     try {
-      const { name, availability, dimensions, price, location, city, province } = req.body;
+      const { name, availability,imgpath,type, dimensions, price, location, city, province } = req.body;
       
       // Check for missing required fields
-      if (!name || !availability || !dimensions || !price || !location || !city || !province) {
+      if (!name || !availability || !dimensions ||!imgpath||!type|| !price || !location || !city || !province) {
         return res.status(400).json({ 
           success: false,
           message: "Please provide all the required input fields." 
@@ -242,8 +242,10 @@ export const insertBillboard = async (req, res) => {
   
       // Create a new Billboard document
       const newBillboard = new Billboard({
-        name,
+        name, 
+        imgpath,
         availability,
+        type,
         dimensions,
         price,
         location,

@@ -13,19 +13,22 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
     AllCities: null,
     Size: null
   });
+  console.log(storebillboards.availability)
  
-
+  let checkavailability;
   const city = storebillboards.map((item, index) => {
+    checkavailability=item.availability
     return item.city.name;
   });
-
+  
+   console.log(checkavailability)
   const menuItems = [
     {
       name: 'Availability',
       hover: <LuChevronsUpDown />,
       toggleState: availability,
       setToggleState: setAvailability,
-      items: ['Available', 'Unavailable', "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+      items: checkavailability
     },
     {
       name: 'Type',
