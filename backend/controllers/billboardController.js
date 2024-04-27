@@ -66,6 +66,54 @@ export const searchbyCity=async(req,res)=>{
        });
      }
 }
+export const updateBillboard = async (req, res) => {
+    try {
+        const billboardId = req.params.id;
+        const { name, availability, dimensions, price, location, city, province } = req.body;
+
+        // Validate required fields
+        if (!name || !availability || !dimensions || !price || !location || !city || !province) {
+            return res.status(400).json({ 
+                success: false,
+                message: "Please provide all the required input fields." 
+            });
+        }
+
+        // Check if the billboard exists
+        const existingBillboard = await Billboard.findById(billboardId);
+        if (!existingBillboard) {
+            return res.status(404).json({ 
+                success: false,
+                message: "Billboard not found." 
+            });
+        }
+
+        // Update the billboard fields
+        existingBillboard.name = name;
+        existingBillboard.availability = availability;
+        existingBillboard.dimensions = dimensions;
+        existingBillboard.price = price;
+        existingBillboard.location = location;
+        existingBillboard.city = city;
+        existingBillboard.province = province;
+
+        // Save the updated billboard
+        const updatedBillboard = await existingBillboard.save();
+        
+        return res.status(200).json({ 
+            success: true,
+            message: "Billboard updated successfully.",
+            billboard: updatedBillboard 
+        });
+    } catch (error) {
+        console.error('Error updating billboard:', error);
+        return res.status(500).json({ 
+            success: false,
+            error: 'Internal server error' 
+        });
+    }
+};
+
 export const searchbylocation = async (req, res) => {
     try {
         const { search, availability, type, cities, size } = req.body;
@@ -112,6 +160,35 @@ export const searchbylocation = async (req, res) => {
         res.status(500).json({ success: false, error: 'Internal server error' });
     }
 };
+export const deleteBillboard = async (req, res) =>{
+    try {
+        const getbillboardid= req.params.id;
+        
+        // Check if the billboard exists
+        const getbillboard= await Billboard.findById(getbillboardid);
+        if(!getbillboard){
+            return res.status(404).json({ 
+                success: false,
+                message: "Billboard not found." 
+            });
+        }
+        
+        // Delete the billboard
+        const deletebillboard = await Billboard.findByIdAndDelete(getbillboardid);
+        return res.status(200).json({ 
+            success: true,
+            message: "Billboard deleted successfully.",
+            billboard: deletebillboard 
+        });
+    }    
+    catch (error) {
+        console.error('Error deleting billboard:', error);
+        return res.status(500).json({ 
+            success: false,
+            error: 'Internal server error' 
+        });
+    }
+}
 
 
 // Controller function to insert a new billboard
