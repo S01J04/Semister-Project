@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import databaseConnection from "./config/database.js";
 import cookieParser from "cookie-parser";
 import userRoute from "./routes/userRoute.js";
+import billboardRoutes from './routes/billboardRoutes.js'
 import cors from "cors";
 
 dotenv.config({
@@ -25,7 +26,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // api
-app.use("/shahads/user",userRoute);
+app.use("/api/user",userRoute);
+app.use("/api/billboards",billboardRoutes);
 
  
 

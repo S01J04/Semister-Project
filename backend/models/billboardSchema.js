@@ -1,19 +1,32 @@
 // models/Billboard.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 
 const billboardSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
   }, 
+  imgpath: {
+    type: String,
+    required: true
+  },
    availability: {
     type: [String],
+    required: true,
+    default: "available"
+  },
+  dimensions: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
     required: true
   },
   location: {
     type: {
       type: String,
-      enum: ['Point'],
       required: true
     },
     coordinates: {
@@ -22,11 +35,13 @@ const billboardSchema = new mongoose.Schema({
     }
   },
   city: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'City',
     required: true
   },
   province: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Province',
     required: true
   },
   country: {
@@ -39,4 +54,4 @@ billboardSchema.index({ location: '2dsphere' });
 
 const Billboard = mongoose.model('Billboard', billboardSchema);
 
-module.exports = Billboard;
+export default Billboard;
