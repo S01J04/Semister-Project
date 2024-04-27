@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { headerlefticons, headerrighticons } from './icons';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const DropdownList = ({ items, setHrefitem }) => {
+
   return (
     <ul className="absolute sm:w-[120%] sm:top-full top-20 w-[40%] left-[200px] sm:left-0 z-10 bg-gray-200 shadow-lg">
       {items.items.map((item) => (
-        <li key={item} onClick={() => setHrefitem(item)} className="px-4 text-start border-b border-gray-300 py-3 text-gray-400 hover:bg-gray-100">
-          <Link to={items.href} className="text-gray-500 text-sm"> {item}</Link>
+        <li key={item}   className="px-4 text-start border-b border-gray-300 py-3 text-gray-400 hover:bg-gray-100">
+          <Link to={items.href+item._id} className="text-gray-500 text-sm"> {item.name}</Link>
         </li>
       ))}
     </ul>
@@ -16,9 +18,26 @@ const DropdownList = ({ items, setHrefitem }) => {
 };
 
 export default function Header() {
+  const  [getprovinces, setgetprovinces] = useState([])
+  console.log(getprovinces)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get('http://localhost:3000/api/billboards/getprovince');
+  
+        setgetprovinces(res.data.province)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); 
+
+
+  }, []);
+
   const [showCities, setShowCities] = useState(false);
   const [showProvinces, setShowProvinces] = useState(false);
-  const [hrefitem, setHrefitem] = useState('');
   
   const menuItems = [
     {
@@ -28,11 +47,11 @@ export default function Header() {
     },
     {
       name: 'Explore Billboards',
-      href: `/search-results/${hrefitem}`,
+      href: `/search-results/`,
       hover: <ChevronDown className="ml-2 h-4 w-4" />,
       onMouseEnter: () => setShowProvinces(true),
       onMouseLeave: () => setShowProvinces(false),
-      items: ['KPK', 'PUNJAB', 'SINDH', 'BALOCHISTAN', 'AZADKASHMIR'],
+      items: getprovinces,
       itemstoggle: true
     },
     {
@@ -131,7 +150,7 @@ export default function Header() {
                   >
                     {item.name}
                     <span className="ml-2">{item.hover}</span>
-                    {((item.name === 'Explore Billboards' && showProvinces) || (item.name === 'Search by City' && showCities)) && <DropdownList items={item} setHrefitem={setHrefitem} />}
+                    {((item.name === 'Explore Billboards' && showProvinces) || (item.name === 'Search by City' && showCities)) && <DropdownList items={item} />}
                   </li>
                 ):(<Link to={item.href}>
                   <li

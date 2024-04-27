@@ -22,13 +22,37 @@ export const searchbyProvince = async (req, res) => {
         });
       }
   
-      const getbillboards = await Billboard.find({ province: provinceId }).populate("province");
+      const getbillboards = await Billboard.find({ province: provinceId }).populate("city").populate("province");
       console.log(getbillboards);
   
       return res.status(201).json({
         success: true,
         message: 'Billboard get successfully',
         billboard: getbillboards
+      });
+    } catch (error) {
+      console.error('Error getting billboard:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Internal server error'
+      });
+    }
+  };
+  export const getProvince = async (req, res) => {
+    try {
+      const province= await Province.find()
+      if(!province){
+        res.status(401).json({
+            success: false,
+            error: 'no province found'
+          });
+      }
+
+  
+      return res.status(201).json({
+        success: true,
+        message: 'province get successfully',
+        province
       });
     } catch (error) {
       console.error('Error getting billboard:', error);
