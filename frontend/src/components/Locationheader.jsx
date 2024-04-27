@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { LuChevronsUpDown } from "react-icons/lu";
 import products from './billboards';
 
-const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,setsszie,handlesearch }) => {
+const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,setsszie,storebillboards }) => {
   const [availability, setAvailability] = useState(false);
   const [type, setType] = useState(false);
   const [cities, setCities] = useState(false);
@@ -15,8 +15,8 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
   });
  
 
-  const city = products.map((item, index) => {
-    return item.city;
+  const city = storebillboards.map((item, index) => {
+    return item.city.name;
   });
 
   const menuItems = [

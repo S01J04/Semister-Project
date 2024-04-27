@@ -4,14 +4,12 @@ import { MdOutlineFormatListBulleted } from "react-icons/md";
 import { LuArrowUpDown } from "react-icons/lu";
 import products from "./billboards";
 
-const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie }) => {
+const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie ,storebillboards}) => {
  
-  const filteredProducts = products.filter((product) => {
-    const productName = (product.city || "").toLowerCase();
-    const locationDescription = (product.locationDescription || "").toLowerCase();
-    const availability = (product.availability || "").toLowerCase();
-    const size = (product.size || "").toLowerCase();
-    const price = (product.price || "").toLowerCase();
+  const filteredProducts = storebillboards.filter((product) => {
+    const productName = (product.city.name || "").toLowerCase();
+    const size = (product.dimensions || "").toLowerCase();
+    const price = (product.price )
     const query = SearchQuery.toLowerCase();
 
     // Check if the product matches the search query or if the query is empty
@@ -26,8 +24,7 @@ const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie }) => {
     // Check if the product matches the selected availability, type, cities, and size
     const matchesSelectedItems =
       (!aavailability || aavailability.toLowerCase() === product.availability.toLowerCase()) &&
-      (!ttype || ttype.toLowerCase() === product.type.toLowerCase()) &&
-      (!ccites || ccites.toLowerCase() === product.city.toLowerCase()) &&
+      (!ccites || ccites.toLowerCase() === product.city.name.toLowerCase()) &&
       (!szie || szie.toLowerCase() === product.size.toLowerCase());
 
     // Return true if the product matches the search query and all selected items
@@ -67,7 +64,7 @@ const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie }) => {
             _id={product._id}
             img={product.img}
             name={product.name}
-            city={product.city}
+            city={product.city.name}
             locationDescription={product.locationDescription}
             availability={product.availability}
             size={product.size}

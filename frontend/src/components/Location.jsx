@@ -24,10 +24,6 @@ const Location = () => {
 
     fetchData(); // Call the async function inside useEffect
   }, [statename]);
-   
- 
-
-
   const [searchproduct, setSearchproducts] = useState('');
   const [aavailability, setaavailability] = useState('')
   const [ttype, setttype] = useState('')
@@ -42,12 +38,14 @@ const Location = () => {
         setttype={setttype}
         setccites={setccities}
         setsszie={setsszie}
+        storebillboards={storebillboards}
       />
       <Path />
       <Products SearchQuery={searchproduct}
        aavailability={aavailability}
         ttype={ttype}
         ccites={ccities}
+        storebillboards={storebillboards}
         szie={ssize}/>
     </div>
   );
