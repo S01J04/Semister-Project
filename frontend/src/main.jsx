@@ -19,8 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route index element={<HomePage />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="location" element={<Location />} />
-          <Route path="specificlocation" element={<Specificlocation />} />
+          <Route path="search-results/:statename" element={<Location />} />
+          <Route path="billboards/:billboardinfo" element={<Specificlocation />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<AdminPage />} />

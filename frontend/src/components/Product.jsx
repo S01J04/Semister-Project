@@ -7,7 +7,7 @@ const Billboard = (props) => {
 
   const handleClick = (product) => {
     // Navigate to the Specificlocation page with product details as props
-    navigate("/specificlocation", { state: { product } });
+    navigate(`/billboards/${product.city}`, { state: { product } });
   };
 
   return (
