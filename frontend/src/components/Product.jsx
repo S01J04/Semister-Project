@@ -6,10 +6,11 @@ const Billboard = (props) => {
   const navigate = useNavigate();
 
   const handleClick = (product) => {
+    console.log(product)
     // Navigate to the Specificlocation page with product details as props
-    navigate(`/billboards/${product.city}`, { state: { product } });
+    navigate(`/billboards/${product.cityid}`, { state: { product } });
   };
-
+ 
   return (
     <div className="w-full relative group">
       <div className=" relative ">

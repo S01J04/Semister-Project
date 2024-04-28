@@ -13,17 +13,11 @@ const Locationheader = ({ setSearchproduct ,setaavailability,setttype,setccites,
     AllCities: null,
     Size: null
   });
-  console.log(storebillboards.availability)
- 
   const city = storebillboards.map((item) => {
   return item.city.name;
 });
 
 const uniqueCities = [...new Set(city)];
-
-
-
-  
 
   const menuItems = [
     {

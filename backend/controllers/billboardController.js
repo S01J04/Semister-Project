@@ -63,33 +63,35 @@ export const searchbyProvince = async (req, res) => {
     }
   };
   
-export const searchbyCity=async(req,res)=>{
+  export const searchbyCity = async (req, res) => {
     try {
-       
-        const getcityid= req.params.cityid
-        const getcityinfo= await Province.find({_id:getcityid})
-        if(!getcityinfo){
-            return res.status(401).json({ 
-                success: false,
-                message: 'No billboards in this city'
-              });
-        }
-        const getbillboards=await Billboard.find({city:getcityid}).populate("city").populate("province")
-        
-   
-       return res.status(201).json({ 
-         success: true,
-         message: 'Billboard get successfully', 
-         billboard: getbillboards
-       });
-     } catch (error) {
-       console.error('Error gettingbillboard:', error);
-       res.status(500).json({ 
-         success: false,
-         error: 'Internal server error' 
-       });
-     }
-}
+      const getcityid = req.params.cityid;
+      const getcityinfo = await City.find({ _id: getcityid });
+  
+      // Check if any city information was found
+      if (!getcityinfo || getcityinfo.length === 0) {
+        return res.status(401).json({
+          success: false,
+          message: 'No billboards in this city'
+        });
+      }
+  
+      const getbillboards = await Billboard.find({ city: {_id:getcityid} }).populate("city").populate("province");
+  
+      return res.status(201).json({
+        success: true,
+        message: 'Billboards retrieved successfully',
+        billboards: getbillboards
+      });
+    } catch (error) {
+      console.error('Error getting billboards:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Internal server error'
+      });
+    }
+  };
+  
 export const updateBillboard = async (req, res) => {
     try {
         const billboardId = req.params.id;

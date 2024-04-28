@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Locationheader from './Locationheader';
 import Path from './path.jsx';
 import Billboradpage from './Billboradpage.jsx';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Specificlocation = () => {
+  const { _id } = useParams();
+  const [storebillboards, setstorebillboards] = useState([])
+  console.log(storebillboards,"Iam similar cities")
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3000/api/billboards/city/${_id}`);
+       
+        setstorebillboards(res.data.billboards)
+      } catch (error) {
+        console.error('Error fetching province data:', error);
+      }
+    };
+ 
+    fetchData(); // Call the async function inside useEffect
+  }, [_id]);
   const location = useLocation();
   const { state } = location;
   const { product } = state || {};
-
-  const [searchproduct, setSearchproducts] = useState('');
-  const [aavailability, setaavailability] = useState('');
-  const [ttype, setttype] = useState('');
-  const [ccities, setccities] = useState('');
-  const [ssize, setsszie] = useState('');
-  console.log(state)
-  // You can use the product details here in your component
-
+   console.log(setstorebillboards)
+  
+  console.log(product,"product")
   return (
     <div>
-      <Locationheader
-        setSearchproduct={setSearchproducts}
-        setaavailability={setaavailability}
-        setttype={setttype}
-        setccites={setccities}
-        setsszie={setsszie}
-      />
       <Path />
       <Billboradpage props={product}/>
     </div>

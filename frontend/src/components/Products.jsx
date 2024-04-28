@@ -65,10 +65,15 @@ const Products = ({ SearchQuery ,aavailability, ttype , ccites,szie ,storebillbo
             img={product.imgpath}
             name={product.name}
             city={product.city.name}
+            cityid={product.city._id}
             locationDescription={product.name}
+            province={product.province.name}
             availability={product.availability}
             size={product.dimensions}
             price={product.price}
+            type={product.type}
+            
+
           />
         ))}
       </div>

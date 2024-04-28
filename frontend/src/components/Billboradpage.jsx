@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import products from './billboards';
 import ReactPlayer from 'react-player';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 const BillboardPage = ({ props }) => {
+    
     console.log(props.city)
   return (
     <div className=" mx-auto border w-[80%] border-black">
