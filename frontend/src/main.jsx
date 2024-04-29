@@ -10,6 +10,7 @@ import Contact from "./components/Contact.jsx";
 import About from './components/About.jsx';
 import Location from './components/Location.jsx';
 import Specificlocation from './components/Specificlocation.jsx';
+import Register from './components/Register.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="billboards/:_id" element={<Specificlocation />} />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </Router>
