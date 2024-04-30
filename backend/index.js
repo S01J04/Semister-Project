@@ -4,6 +4,7 @@ import databaseConnection from "./config/database.js";
 import cookieParser from "cookie-parser";
 import userRoute from "./routes/userRoute.js";
 import billboardRoutes from './routes/billboardRoutes.js';
+import adminRoute from './routes/adminRoute.js';
 import cors from "cors";
 
 dotenv.config({ path: ".env" });
@@ -25,6 +26,7 @@ app.use(cors({
 // API routes
 app.use("/api/user", userRoute);
 app.use("/api/billboards", billboardRoutes);
+app.use("/api/adminpage",adminRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening at port ${process.env.PORT}`);

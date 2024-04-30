@@ -32,7 +32,7 @@ export const Login = async (req, res) => {
         }
         const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, { expiresIn: "1d" });
         return res.status(201).cookie("token", token, { expiresIn: "1d", httpOnly: true }).json({
-            message: `Welcome back ${user.name}`,
+            message: `Welcome admin ${user.email}`,
             user,
             success: true
         })
@@ -42,7 +42,39 @@ export const Login = async (req, res) => {
 }
 export const logout = (req, res) => {
     return res.cookie("token", "", { expiresIn: new Date(Date.now()) }).json({
-        message: "user logged out successfully.",
+        message: "admin logged out successfully.",
         success: true
     })
+}
+export const Register = async (req, res) => {
+    try {
+        const {  email , password } = req.body;
+        // basic validation
+        if ( !email || !password) {
+            return res.status(401).json({
+                message: "All fields are required.",
+                success: false
+            })
+        }
+        const user = await Admin.findOne({ email });
+        if (user) {
+            return res.status(401).json({
+                message: "User already exist.",
+                success: false
+            })
+        }
+        const hashedPassword = await bcryptjs.hash(password, 16);
+
+        await Admin.create({
+            email,
+            password: hashedPassword
+        });
+        return res.status(201).json({
+            message: "Account created successfully.",
+            success: true
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
 }

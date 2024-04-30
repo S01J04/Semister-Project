@@ -197,7 +197,7 @@ export const deleteBillboard = async (req, res) =>{
                 success: false,
                 message: "Billboard not found." 
             });
-        }
+        }``
         
         // Delete the billboard
         const deletebillboard = await Billboard.findByIdAndDelete(getbillboardid);
