@@ -14,9 +14,9 @@ const Location = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/billboards/province/${statename}`);
-       
+         const  res = await axios.get(`http://localhost:3000/api/billboards/province/${statename}`);
         setstorebillboards(res.data.billboard)
+       
       } catch (error) {
         console.error('Error fetching province data:', error);
       }
@@ -40,7 +40,7 @@ const Location = () => {
         setsszie={setsszie}
         storebillboards={storebillboards}
       />
-      <Path />
+      <Path back={"Home"}/>
       <Products SearchQuery={searchproduct}
        aavailability={aavailability}
         ttype={ttype}

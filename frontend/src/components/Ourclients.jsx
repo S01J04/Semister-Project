@@ -9,7 +9,7 @@ const Ourclients = () => {
           <img
             src="https://logomak.com/blog/wp-content/uploads/2023/09/Starbucks-logo-500x281-min.png"
             className='h-full w-[130px] object-cover mix-blend-multiply hover:scale-110 transform transition-transform duration-300'
-            alt=""
+            alt=""cc
           />
         </div>
         <div className='h-[130px] bg-transparent cursor-pointer'>

@@ -30,7 +30,7 @@ const Specificlocation = () => {
   console.log(product,"product")
   return (
     <div>
-      <Path />
+      <Path back={"Back to search"} />
       <Billboradpage props={product}/>
     </div>
   );

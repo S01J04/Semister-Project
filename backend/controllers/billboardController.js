@@ -219,69 +219,76 @@ export const deleteBillboard = async (req, res) =>{
 
 // Controller function to insert a new billboard
 export const insertBillboard = async (req, res) => {
+    console.log(req.body, req.file);
     try {
-      const { name, description, availability, imgpath, type, dimensions, price, location, city, province } = req.body;
-      
-      // Check for missing required fields
-      if (!name || !description || !availability || !dimensions || !imgpath || !type || !price || !location || !city || !province) {
-        return res.status(400).json({ 
-          success: false,
-          message: "Please provide all the required input fields." 
+        const { name, description, availability, type, dimensions, price, location, city, province } = req.body;
+
+        // Convert longitude and latitude to numbers
+        const longitude = parseFloat(location.longitude);
+        const latitude = parseFloat(location.latitude);
+
+        // Check for missing required fields
+        if (!name || !description || !availability || !dimensions || !type || !price || !longitude || !latitude || !city || !province) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide all the required input fields."
+            });
+        }
+
+        // Check if a billboard with the same name or location already exists
+        const existingBillboard = await Billboard.findOne({
+            name: name,
+            'location.coordinates': [longitude, latitude]
         });
-      }
-  
-      // Check if a billboard with the same name or location already exists
-      const existingBillboard = await Billboard.findOne({ 
-        name: name,
-        'location.coordinates': location.coordinates
-      });
-      if (existingBillboard) {
-        return res.status(409).json({ 
-          success: false,
-          message: "A billboard with the same name or location already exists." 
+        if (existingBillboard) {
+            return res.status(409).json({
+                success: false,
+                message: "A billboard with the same name or location already exists."
+            });
+        }
+
+        // Check if the province exists or create a new one
+        let existingProvince = await Province.findOne({ name: province });
+        if (!existingProvince) {
+            existingProvince = await Province.create({ name: province });
+        }
+
+        // Check if the city exists or create a new one
+        let existingCity = await City.findOne({ name: city, province: existingProvince._id });
+        if (!existingCity) {
+            existingCity = await City.create({ name: city, province: existingProvince._id });
+        }
+
+        // Create a new Billboard document
+        const newBillboard = new Billboard({
+            name,
+            description,
+            imgpath: req.file.path,
+            availability,
+            type,
+            dimensions,
+            price,
+            location: {
+                type: "Point",
+                coordinates: [longitude, latitude]
+            },
+            city: existingCity._id, // Use the ObjectId of the existing city
+            province: existingProvince._id // Use the ObjectId of the existing province
         });
-      }
-  
-      // Check if the province exists or create a new one
-      let existingProvince = await Province.findOne({ name: province });
-      if (!existingProvince) {
-        existingProvince = await Province.create({ name: province });
-      }
-  
-      // Check if the city exists or create a new one
-      let existingCity = await City.findOne({ name: city, province: existingProvince._id });
-      if (!existingCity) {
-        existingCity = await City.create({ name: city, province: existingProvince._id });
-      }
-  
-      // Create a new Billboard document
-      const newBillboard = new Billboard({
-        name, 
-        description,
-        imgpath,
-        availability,
-        type,
-        dimensions,
-        price,
-        location,
-        city: existingCity._id, // Use the ObjectId of the existing city
-        province: existingProvince._id // Use the ObjectId of the existing province
-      });
-  
-      // Save the new billboard document to the database
-      await newBillboard.save();
-  
-      res.status(201).json({ 
-        success: true,
-        message: 'Billboard inserted successfully', 
-        billboard: newBillboard 
-      });
+
+        // Save the new billboard document to the database
+        await newBillboard.save();
+
+        res.status(201).json({
+            success: true,
+            message: 'Billboard inserted successfully',
+            billboard: newBillboard
+        });
     } catch (error) {
-      console.error('Error inserting billboard:', error);
-      res.status(500).json({ 
-        success: false,
-        error: 'Internal server error' 
-      });
+        console.error('Error inserting billboard:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error'
+        });
     }
-  };
-  
+};

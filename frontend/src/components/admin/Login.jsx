@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { getUser } from '../../redux/userSlice'
+import { useDispatch } from 'react-redux'
 
 export function SignInAdmin() {
+   const dispatch=useDispatch()
     const navigate=useNavigate()
     const [username, setusername] = useState("")
     const [password, setpassword] = useState("")
@@ -13,7 +16,10 @@ export function SignInAdmin() {
       if(username!="" && password!=""){
         const res=await axios.post("http://localhost:3000/api/adminpage/adminlogin",{email:username,password:password})
         console.log(res.data)
-        if(res){
+        dispatch(getUser(res?.data?.user));
+        if(res.data){
+            
+
             navigate("/admindashboard")
         }
       }

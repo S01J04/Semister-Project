@@ -1,6 +1,7 @@
 import { User } from "../models/userSchema.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { Contactpage } from "../models/contactScehma.js";
 
 export const Register = async (req, res) => {
     try {
@@ -65,6 +66,28 @@ export const Login = async (req, res) => {
         return res.status(201).cookie("token", token, { expiresIn: "1d", httpOnly: true }).json({
             message: `Welcome back ${user.name}`,
             user,
+            success: true
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const Contact = async (req, res) => {
+    try {
+        const { name,email, description} = req.body;
+        if (!email || !name||!description) {
+            return res.status(401).json({
+                message: "All fields are required.",
+                success: false
+            })
+        };
+      
+        const contact= await Contactpage.create({name:name,email:email,description:description})
+       
+       
+        return res.status(201).json({
+            message: `Contact successfull`,
+            contact,
             success: true
         })
     } catch (error) {

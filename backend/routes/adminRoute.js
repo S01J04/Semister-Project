@@ -1,7 +1,6 @@
 import express from "express";
 import { Login, Register, logout } from "../controllers/adminController.js";
 
-
 const router = express.Router();
 
 router.route("/adminlogin").post(Login);

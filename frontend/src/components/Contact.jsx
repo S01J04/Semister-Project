@@ -1,6 +1,29 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 const Contact = () => {
+  const [name, setname] = useState('')
+  const [email, setemail] = useState('')
+  const [description, setdescription] = useState('')
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/api/user/contact", {
+        name,
+        email,
+        description
+      });
+      if (response.data.success) {
+        setname("");
+        setemail("");
+        setdescription("");
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <div>
       <section className="text-gray-700 body-font relative">
@@ -14,6 +37,7 @@ const Contact = () => {
               gentrify.
             </p>
           </div>
+          <form action="" className='lg:w-1/2 md:w-2/3 mx-auto ' onSubmit={handlesubmit}>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
@@ -22,6 +46,8 @@ const Contact = () => {
                     Name
                   </label>
                   <input
+                  value={name}
+                  onChange={(e)=>setname(e.target.value)}
                     type="text"
                     id="name"
                     name="name"
@@ -38,6 +64,8 @@ const Contact = () => {
                     Email
                   </label>
                   <input
+                  value={email}
+                  onChange={(e)=>setemail(e.target.value)}
                     type="email"
                     id="email"
                     name="email"
@@ -54,6 +82,8 @@ const Contact = () => {
                     Message
                   </label>
                   <textarea
+                  value={description}
+                  onChange={(e)=>setdescription(e.target.value)}
                     id="message"
                     name="message"
                     className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
@@ -61,7 +91,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="p-2 w-full">
-                <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                <button type='submit' className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                   Button
                 </button>
               </div>
@@ -134,6 +164,7 @@ const Contact = () => {
               </div>
             </div>
           </div>
+              </form>
         </div>
       </section>
     </div>

@@ -17,9 +17,11 @@ const Billboard = (props) => {
         <div>
           <img
             className="w-full h-[250px] object-cover"
-            src={props.img}
+            src={`http://localhost:3000/${props.img}`}
+            
             alt={props.name}
           />
+          {console.log(`http://localhost:3000/${props.img}`)}
         </div>
         <div className="max-w-full py-3 flex flex-col gap-1 border-[1px] border-t-0 px-4">
           <div className="flex items-center justify-between font-titleFont">

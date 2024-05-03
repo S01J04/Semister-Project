@@ -3,6 +3,7 @@ import { headerlefticons, headerrighticons } from './icons';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const DropdownList = ({ items, setHrefitem }) => {
 
@@ -18,24 +19,17 @@ const DropdownList = ({ items, setHrefitem }) => {
 };
 
 export default function Header() {
-  const  [getprovinces, setgetprovinces] = useState([])
-  console.log(getprovinces)
+
+  const [getprovinces, setgetprovinces] = useState([]);
+  const province = useSelector((state) => state.billboard);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get('http://localhost:3000/api/billboards/getprovince');
-  
-        setgetprovinces(res.data.province)
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData(); 
-
-
+    const items = province.province.map((item) => item);
+   
+    setgetprovinces(items);
   }, []);
-
+  console.log(getprovinces)
+  
   const [showCities, setShowCities] = useState(false);
   const [showProvinces, setShowProvinces] = useState(false);
   

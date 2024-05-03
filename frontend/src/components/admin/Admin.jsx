@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Leftsidebar from './Leftsidebar'
 
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Header from './Header'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const Admin = () => {
     
+    const { user, otherUsers } = useSelector(store => store.user);
+    const navigate = useNavigate();
+  
+    useEffect(()=>{
+      if (!user) {
+        navigate("/adminlogin");
+      }
+    },[]);
    
   return (
     <div className='w-screen h-screen '>

@@ -16,7 +16,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-
+app.use('/uploads',express.static('uploads'))
 // Configure CORS
 app.use(cors({
   origin: "http://localhost:5173", // Allow requests from this origin
