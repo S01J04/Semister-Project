@@ -33,7 +33,7 @@ const Billboard = (props) => {
           </div>
           <div>
             <p className="text-[#767676] text-[14px]">
-              {props.locationDescription}
+              {props.name}
             </p>
           </div>
           <div className="flex justify-end">

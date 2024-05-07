@@ -4,6 +4,7 @@ const billboardSlice = createSlice({
     name:"Billboard",
     initialState:{
         province:null,
+        data:null
       
     },
     reducers:{
@@ -11,10 +12,14 @@ const billboardSlice = createSlice({
         getProvince:(state,action)=>{
             state.province = action.payload;
         },
+        getAllcities:(state,action)=>{
+            state.data = action.payload;
+        },
+
 
     }
 });
-export const {getProvince,} = billboardSlice.actions;
+export const {getProvince,getAllcities} = billboardSlice.actions;
 export default billboardSlice.reducer;
 
 

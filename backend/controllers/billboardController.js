@@ -38,6 +38,30 @@ export const searchbyProvince = async (req, res) => {
       });
     }
   };
+  export const getalldata= async (req, res) => {
+    try {
+      const billboard= await Billboard.find().populate("city").populate("province");
+      if(!billboard){
+        res.status(401).json({
+            success: false,
+            error: 'no province found'
+          });
+      }
+
+      return res.status(201).json({
+        success: true,
+        message: 'billboard get successfully',
+        billboard
+      });
+    } catch (error) {
+      console.error('Error getting billboard:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Internal server error'
+      });
+    }
+  };
+  
   export const getProvince = async (req, res) => {
     try {
       const province= await Province.find()

@@ -88,7 +88,7 @@ const uniqueCities = [...new Set(city)];
   };
 
   return (
-    <div className='flex items-center bg-blue-600 gap-x-4 justify-center py-2'>
+    <div className=' items-center hidden sm:flex bg-blue-600 gap-x-4 justify-center py-2'>
       <div>
         <input
           className='border-none outline-none rounded w-[350px] px-4 py-2'

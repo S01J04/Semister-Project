@@ -1,24 +1,21 @@
 import axios from "axios";
-import { USER_API_END_POINT } from "../utils/constant";
 import { useEffect } from "react";
 import {useDispatch} from "react-redux";
-import { getMyProfile } from "../redux/userSlice";
+import { getAllcities, getProvince } from "../redux/billboardSlice";
 
-const useGetProfile = (id) => {
+
+const usealldata = () => {
     const dispatch = useDispatch();
     useEffect(()=>{
-        const fetchMyProfile = async () => {
+        const fetchalldata = async () => {
             try {
-                const res = await axios.get(`${USER_API_END_POINT}/profile/${id}`,{
-                    withCredentials:true
-                });
-                console.log(res);
-                dispatch(getMyProfile(res.data.user));
-            } catch (error) {
-                console.log(error);
-            }
+                const  res = await axios.get(`http://localhost:3000/api/billboards/getall`);
+               dispatch(getAllcities(res.data.billboard))
+             } catch (error) {
+               console.error('Error fetching province data:', error);
+             }
         }
-        fetchMyProfile();
-    },[id]);
+        fetchalldata();
+    },[]);
 };
-export default useGetProfile;
+export default usealldata;
