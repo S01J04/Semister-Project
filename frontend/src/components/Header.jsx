@@ -4,14 +4,13 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-
 const DropdownList = ({ items, setHrefitem }) => {
-
+  console.log(items)
   return (
     <ul className="absolute sm:w-[120%] sm:top-full top-20 w-[40%] left-[200px] sm:left-0 z-10 bg-gray-200 shadow-lg">
       {items.items.map((item) => (
-        <li key={item}   className="px-4 text-start border-b border-gray-300 py-3 text-gray-400 hover:bg-gray-100">
-          <Link to={items.href+item._id} className="text-gray-500 text-sm"> {item.name}</Link>
+        <li key={item} className="px-4 text-start border-b border-gray-300 py-3 text-gray-400 hover:bg-gray-100">
+          <Link to={items.href + item} className="text-gray-500 text-sm"> {item}</Link>
         </li>
       ))}
     </ul>
@@ -28,7 +27,8 @@ export default function Header() {
    
     setgetprovinces(items);
   }, []);
-  console.log(getprovinces)
+  // console.log(getprovinces)
+  
   
   const [showCities, setShowCities] = useState(false);
   const [showProvinces, setShowProvinces] = useState(false);

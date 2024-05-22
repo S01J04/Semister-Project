@@ -25,7 +25,7 @@ const AdminProduct = (props) => {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full rounded-lg overflow-hidden border-gray-600 shadow-lg shadow-gray-500">
             <div className=" relative">
                 <div>
                     <img

@@ -1,63 +1,117 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { getUser } from '../redux/userSlice';
+import { useDispatch } from 'react-redux';
+import SimpleSnackbar from './SimpleSnackbar'; // Import the SimpleSnackbar component
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [useremail, setuseremail] = useState('');
+  const [password, setpassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false); // Add snackbarOpen state
 
-  const [islogin, setislogin] = useState(false);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (useremail !== '' && password !== '') {
+      try {
+        setLoading(true);
+        const res = await axios.post('http://localhost:3000/api/user/login', {
+          email: useremail,
+          password: password
+        });
+        dispatch(getUser(res?.data?.user));
+        if (res.data) {
+          navigate(-1);
+        }
+      } catch (error) {
+        console.error('Error logging in:', error);
+        setSnackbarOpen(true); // Open snackbar on login error
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      console.log('Fill in the required fields');
+    }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false); // Close snackbar
+  };
 
   return (
-    <>
-<section className="flex flex-col md:flex-row h-screen items-center">
-
-<div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-  <img src="https://source.unsplash.com/random" alt="" className="w-full h-full object-cover" />
-</div>
-
-<div className="bg-white w-full md:max-w-md lg:max-w-full  md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
-
-  <div className="w-full h-100">
-
-
-    <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Log in to your account</h1>
-
-    <form className="mt-6" action="#" method="POST">
-      <div>
-        <label className="block text-gray-700">Email Address</label>
-        <input type="email" name="" id="" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autoFocus autoComplete="on" required />
+    <section>
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+          <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">User Sign Page</h2>
+            <p className="mt-2 text-sm text-gray-600">
+              <a
+                href="#"
+                title=""
+                className="font-semibold text-black transition-all duration-200 hover:underline"
+              ></a>
+            </p>
+            <form action="#" method="POST" className="mt-8">
+              <div className="space-y-5">
+                <div>
+                  <label htmlFor="" className="text-base font-medium text-gray-900">
+                    {' '}
+                    Email{' '}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      value={useremail}
+                      onChange={(e) => { setuseremail(e.target.value) }}
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      type="email"
+                      placeholder="Email"
+                    ></input>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="" className="text-base font-medium text-gray-900">
+                      {' '}
+                      Password{' '}
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      value={password}
+                      onChange={(e) => { setpassword(e.target.value) }}
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      type="password"
+                      placeholder="Password"
+                    ></input>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    onClick={(e) => handleLogin(e)}
+                    type="button"
+                    className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                  >
+                    {loading ? 'Logging in...' : 'Login'} <ArrowRight className="ml-2" size={16} />
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="h-screen w-full">
+          <img
+            className="mx-auto h-full w-full rounded-md object-cover"
+            src="https://images.unsplash.com/photo-1630673245362-f69d2b93880e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+            alt=""
+          />
+        </div>
       </div>
-
-      <div className="mt-4">
-        <label className="block text-gray-700">Password</label>
-        <input type="password" name="" id="" placeholder="Enter Password" minLength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required />
-      </div>
-
-      <div className="text-right mt-2">
-        <a href="#" className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</a>
-      </div>
-
-      <button type="submit" className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6">Log In</button>
-    </form>
-
-    <hr className="my-6 border-gray-300 w-full" />
-
-    <button type="button" className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
-      <div className="flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" className="w-6 h-6" viewBox="0 0 48 48"><defs><path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/></defs><clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath><path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z"/><path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z"/><path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z"/><path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"/></svg>
-        <span className="ml-4">
-          Log in
-          with
-          Google</span>
-      </div>
-    </button>
-
-    <p className="mt-8">Need an account? <a href="#" className="text-blue-500 hover:text-blue-700 font-semibold">Create an
-        account</a></p>
-
-
-  </div>
-</div>
-
-</section>
-  </>
+      <SimpleSnackbar open={snackbarOpen} handleClose={handleCloseSnackbar} /> {/* Render the SimpleSnackbar component */}
+    </section>
   );
 }
 

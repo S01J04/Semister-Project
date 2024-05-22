@@ -13,7 +13,7 @@ const useProvinces = () => {
                     withCredentials:true
                 });
               console.log(res.data.province);
-                dispatch(getProvince(res.data.province));
+                dispatch(getProvince(res.data.provinces));
             } catch (error) {
                 console.log(error);
             }

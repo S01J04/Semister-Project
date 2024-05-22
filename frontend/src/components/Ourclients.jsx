@@ -3,7 +3,7 @@ import React from 'react';
 const Ourclients = () => {
   return (
     <>
-      <div className='text-3xl my-10'>OUR PARTNERS</div>
+      <div className='text-3xl my-10 text-center'>OUR PARTNERS</div>
       <div className='grid w-[70%] mx-auto gap-10 grid-cols-2 md:grid-cols-4'>
         <div className='h-[130px] bg-transparent cursor-pointer'>
           <img

@@ -45,13 +45,11 @@ const billboardSchema = new Schema({
     }
   },
   city: {
-    type: Schema.Types.ObjectId,
-    ref: 'City',
+    type: String,
     required: true
   },
   province: {
-    type: Schema.Types.ObjectId,
-    ref: 'Province',
+    type: String,
     required: true
   },
   country: {

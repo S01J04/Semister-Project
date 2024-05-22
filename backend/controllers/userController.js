@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { Contactpage } from "../models/contactScehma.js";
 
 export const Register = async (req, res) => {
+    console.log(req.body)
     try {
         const { name, email, password } = req.body;
         // basic validation
@@ -72,6 +73,24 @@ export const Login = async (req, res) => {
         console.log(error);
     }
 }
+export const getUser = async (req, res) => {
+    try {
+      // Fetch orders from the database 
+      
+      const users = await User.find()
+  
+      res.status(200).json({
+        success: true,
+        data: users
+      });
+    } catch (error) {
+      console.error('Error getting users:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Internal server error'
+      });
+    }
+  };
 export const Contact = async (req, res) => {
     try {
         const { name,email, description} = req.body;

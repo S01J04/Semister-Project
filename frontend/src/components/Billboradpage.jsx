@@ -1,13 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import products from './billboards';
 import ReactPlayer from 'react-player';
 import Map from "./Maps"
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from "../redux/userSlice";
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const BillboardPage = ({ props }) => {
+  const [selectedValue, setSelectedValue] = useState('1');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
   const center = { lat: props.location[0], lng: props.location[1] };
+  const user = useSelector(getUser);
+  const navigate = useNavigate();
+
+  const registerhandel = () => {
+    navigate("/login");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user || !props._id) {
+      console.error('User or billboard ID not available.');
+      return;
+    }
+
+    try {
+      const res = await axios.post("http://localhost:3000/api/order/book/", {
+        userid: user.payload.user.user._id,
+        billboardid: props._id,
+        months: selectedValue
+      });
+
+      console.log('Order booked:', res.data);
+      
+      if (res.data.success) {
+        setSnackbarSeverity('success');
+        setSnackbarMessage('Order booked successfully');
+      } else {
+        setSnackbarSeverity('error');
+        setSnackbarMessage('Already book cannot be booked twice');
+      }
+
+      setSnackbarOpen(true);
+    } catch (error) {
+      console.error('Error booking order:', error);
+      setSnackbarSeverity('error');
+      setSnackbarMessage('Already book cannot be booked twice');
+      setSnackbarOpen(true);
+    }
+  };
+
   const zoom = 11;
-  console.log(props)
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
   return (
     <div className="mx-auto  rounded bg-blue-300 w-[80%]  p-4">
       <div className="grid grid-cols-2  bg-grey-200 items-center justify-around bg-white p-2 rounded">
@@ -80,25 +138,39 @@ const BillboardPage = ({ props }) => {
           </div>
           <div className=" -black p-4 bg-red-200 rounded">
             <div className='text-2xl font-semibold'>Shah Advertizing Pakistan</div>
-            <form className="mt-4">
-              <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" id="name" placeholder="Your Name" className="block w-full  -gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-blue-500 focus:-blue-500" />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
-                <input type="text" id="phone" placeholder="Your Phone Number" className="block w-full  -gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-blue-500 focus:-blue-500" />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="email" placeholder="Your Email Address" className="block w-full  -gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-blue-500 focus:-blue-500" />
-              </div>
-              <div className="flex justify-between mt-4">
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Send Email</button>
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">WhatsApp</button>
-              </div>
-            </form>
+            {props.availability=="available"?<form className="mt-4" method='POST' onSubmit={handleSubmit}>
+    {user ? "":<button className='border px-4 py-3 rounded-md cursor-pointer hover:bg-slate-200 font-bold' onClick={registerhandel}>Register</button>}
+  <div className="mb-4">
+    <label htmlFor="duration" className="block text-sm font-medium text-gray-700">Duration</label>
+    <select 
+  value={selectedValue} 
+  onChange={(e) => setSelectedValue(e.target.value)} // Pass the event parameter (e)
+  id="duration" 
+  className="block w-full bg-gray-100 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+>
+  <option value="1">1 Month</option>
+  <option value="2">2 Months</option>
+  <option value="3">3 Months</option>
+  <option value="4">4 Months</option>
+  <option value="5">5 Months</option>
+  <option value="6">6 Months</option>
+</select>
+
+  </div>
+  <div className="flex justify-end mt-4">
+    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Order</button>
+  </div>
+</form>:"Unvailable plz check later"}
           </div>
+          <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
         </div>
         <div className="flex flex-col w-[30%] mx-3">

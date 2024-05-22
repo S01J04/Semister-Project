@@ -3,6 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { IoMdCloseCircle } from "react-icons/io";
 
 const AdminUpdate = (props) => {
+    
+    const string = props.props.size;
+    const numbers = string.split("x");
+    const num1 = parseFloat(numbers[0]);
+    const num2 = parseFloat(numbers[1]);
+          
+    console.log(num1, num2);
+    
     const [update, setupdate] = useState(false);
     const [formData, setFormData] = useState({
         name: props.props.city,
@@ -10,8 +18,8 @@ const AdminUpdate = (props) => {
         availability: props.props.availability,
         imgpath: '',
         type: props.props.type,
-        width: '', // Separate width and height fields
-        height: '',
+        width: num1, // Separate width and height fields
+        height: num2,
         location: { longitude: props.props.location[0], latitude: props.props.location[1] },
         price: props.props.price,
         city: props.props.city,
@@ -89,8 +97,6 @@ const handleSubmit = async (e) => {
     }
 };
 
-      
-      
     return (
        <>
         {update?"":<div className=' p-8 relative bottom-0  z-10 bg-white  w-[50vw]'>
@@ -124,11 +130,11 @@ const handleSubmit = async (e) => {
                 </div>
                 <div className='col-span-1'>
                     <label htmlFor="width" className='block'>Width:</label>
-                    <input type="text" name="width" placeholder='Width' onChange={handleChange} className='border border-gray-400 p-2 w-full rounded' />
+                    <input type="text" name="width" value={formData.width} placeholder='Width' onChange={handleChange} className='border border-gray-400 p-2 w-full rounded' />
                 </div>
                 <div className='col-span-1'>
                     <label htmlFor="height" className='block'>Height:</label>
-                    <input type="text" name="height" placeholder='Height' onChange={handleChange} className='border border-gray-400 p-2 w-full rounded' />
+                    <input type="text" name="height" value={formData.height} placeholder='Height' onChange={handleChange} className='border border-gray-400 p-2 w-full rounded' />
                 </div>
                 <div className='col-span-1'>
                     <label htmlFor="price" className='block'>Price:</label>

@@ -3,10 +3,14 @@ const { Schema } = mongoose;
 
 // Define schema for order
 const orderSchema = new Schema({
-  date: {
+  startDate: {
     type: Date,
     required: true,
     default: Date.now
+  },
+  endDate: {
+    type: Date,
+    required: true
   },
   billboard: {
     type: Schema.Types.ObjectId,

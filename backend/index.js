@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import userRoute from "./routes/userRoute.js";
 import billboardRoutes from './routes/billboardRoutes.js';
 import adminRoute from './routes/adminRoute.js';
+import orderRoute from './routes/orderRoute.js';
 import cors from "cors";
 
 dotenv.config({ path: ".env" });
@@ -27,6 +28,7 @@ app.use(cors({
 app.use("/api/user", userRoute);
 app.use("/api/billboards", billboardRoutes);
 app.use("/api/adminpage",adminRoute);
+app.use("/api/order",orderRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening at port ${process.env.PORT}`);
