@@ -4,7 +4,7 @@ const Province = () => {
   return (
     <div className='flex sm:flex-row flex-col items-center justify-evenly min-h-[100vh] px-5'>
       <div>
-        <span className='text-2xl'>Explore Billboards In All Provinces/States</span><br />
+        <span className='text-3xl'>Explore Billboards In All Provinces/States</span><br />
         We have presence all over Pakistan.
       </div>
       <div className='h-[80vh] rounded-lg '>
@@ -23,14 +23,14 @@ const Province = () => {
       </div>
       <div className='h-[80vh] rounded-md'>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaYNBj0py1y0W73gmArPjWSH7FDVQ0ls_pviQx6yTO9_3cTEyIrEcE7w8PTsjaHqw9bsg&usqp=CAU"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Minar-E-Pakistan_Lights.jpg/1200px-Minar-E-Pakistan_Lights.jpg"
           alt=""
-          className='h-full object-cover px-2 hover:opacity-80 transition-opacity duration-300 cursor-pointer'
+          className='h-full object-cover object-center px-2 hover:opacity-80 transition-opacity duration-300 cursor-pointer'
         />
       </div>
       <div className='h-[80vh] rounded-md'>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6u48enIR0VqEq0XgDXYPz4ZWhfF7xsRTW0ejLp7j3Sw&s"
+          src="https://wallpapers.com/images/featured/karachi-05x5929jya0yamcv.jpg"
           alt=""
           className='h-full object-cover px-2 hover:opacity-80 transition-opacity duration-300 cursor-pointer'
         />

@@ -60,6 +60,33 @@ export const getalldata = async (req, res) => {
     });
   }
 };
+export const getallcities = async (req, res) => {
+  try {
+    const billboards = await Billboard.find();
+    if (!billboards || billboards.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: 'No billboards found'
+      });
+    }
+
+    // Extract city names from billboard data
+    const cityNames = billboards.map(billboard => billboard.city);
+const uniqueCityNames = [...new Set(cityNames)];
+
+    return res.status(200).json({
+      success: true,
+      message: 'Cities retrieved successfully',
+      cities: uniqueCityNames
+    });
+  } catch (error) {
+    console.error('Error getting cities:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
+};
 
 export const getProvince = async (req, res) => {
   try {

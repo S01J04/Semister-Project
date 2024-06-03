@@ -4,18 +4,23 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { getUser } from '../../redux/userSlice'
 import { useDispatch } from 'react-redux'
-
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 export function SignInAdmin() {
    const dispatch=useDispatch()
     const navigate=useNavigate()
     const [username, setusername] = useState("")
     const [password, setpassword] = useState("")
+    const [open, setOpen] = React.useState(false);
 
     const handleclick= async(e)=>{
         e.preventDefault()
       if(username!="" && password!=""){
+        setOpen(true)
         const res=await axios.post("http://localhost:3000/api/adminpage/adminlogin",{email:username,password:password})
         console.log(res.data)
+        setOpen(false)
         dispatch(getUser(res?.data?.user));
         if(res.data){
             
@@ -101,6 +106,12 @@ export function SignInAdmin() {
             alt=""
           />
         </div>
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       </div>
     </section>
   )

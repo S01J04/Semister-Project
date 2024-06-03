@@ -37,8 +37,8 @@ const Dashboard = () => {
   const [ssize, setsszie] = useState('');
 
   return (
-    <div className='w-full'>
-      <div className='text-center text-3xl font-semibold border-black w-full bg-gray-00 text-white p-4'>Dashboard</div>
+    <div className='w-full bg-gray-200'>
+      <div className='text-center text-3xl font-semibold border-black w-full bg-gray-00  p-4'>Dashboard</div>
       <div>
         <Locationheader
           setSearchproduct={setSearchproducts}

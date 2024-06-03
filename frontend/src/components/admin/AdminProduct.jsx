@@ -2,8 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminUpdate from './AdminUpdate';
 import axios from 'axios';
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 const AdminProduct = (props) => {
+    const [open, setOpen] = React.useState(false);
+
+  
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
     console.log(props)
     const navigate = useNavigate();
     const [showFullDescription, setShowFullDescription] = useState(false);
@@ -89,13 +102,13 @@ const AdminProduct = (props) => {
                     <div className="flex justify-between">
                         <div
                             onClick={() => setupdate(!update)}
-                            className="bg-blue-500 w-20 flex justify-end px-4 py-1 rounded font-semibold cursor-pointer text-white"
+                            className="bg-blue-500  flex justify-end px-4 py-1 text-center rounded  cursor-pointer text-white"
                         >
                             Update
                         </div>
                         <div
                             onClick={() => {handledelete(props._id)}}
-                            className="bg-blue-500 w-20 flex justify-end px-4 py-1 rounded font-semibold cursor-pointer text-white"
+                            className="bg-blue-500 w-20 flex justify-end px-4 py-1 rounded  cursor-pointer text-white"
                         >
                             Delete
                         </div>
@@ -103,7 +116,7 @@ const AdminProduct = (props) => {
                 </div>
                 <div
                     className={`gap-2 flex absolute top-1 font-bold pl-3 ${
-                        props.availability == "Unavailable" ? "text-red-500" : "text-green-500"
+                        props.availability == "unavailable" ? "text-red-500" : "text-green-500"
                     }`}
                 >
                     <span>{props.availability}</span>

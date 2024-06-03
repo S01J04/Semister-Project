@@ -5,8 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { getUser } from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
 import SimpleSnackbar from './SimpleSnackbar'; // Import the SimpleSnackbar component
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 
 const Login = () => {
+  const [open, setOpen] = React.useState(false);
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [useremail, setuseremail] = useState('');
@@ -19,12 +24,15 @@ const Login = () => {
     if (useremail !== '' && password !== '') {
       try {
         setLoading(true);
+        setOpen(true);
         const res = await axios.post('http://localhost:3000/api/user/login', {
           email: useremail,
           password: password
         });
+        setOpen(false);
         dispatch(getUser(res?.data?.user));
         if (res.data) {
+
           navigate(-1);
         }
       } catch (error) {
@@ -110,6 +118,12 @@ const Login = () => {
           />
         </div>
       </div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <SimpleSnackbar open={snackbarOpen} handleClose={handleCloseSnackbar} /> {/* Render the SimpleSnackbar component */}
     </section>
   );

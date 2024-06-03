@@ -13,7 +13,7 @@ const AdminUpdate = (props) => {
     
     const [update, setupdate] = useState(false);
     const [formData, setFormData] = useState({
-        name: props.props.city,
+        name: props.props.name,
         description: props.props.locationDescription,
         availability: props.props.availability,
         imgpath: '',
@@ -99,9 +99,8 @@ const handleSubmit = async (e) => {
 
     return (
        <>
-        {update?"":<div className=' p-8 relative bottom-0  z-10 bg-white  w-[50vw]'>
-            <div className='text-center text-3xl font-bold border-b-2 border-black mb-4'>BillBoards CRUD</div>
-            <div className='mb-4'>UPDATE</div>
+        {update?"":<div className=' fixed  top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/2 w-[65%] h-[90%] shadow-md shadow-black flex items-center justify-center bg-white z-50'>
+
             <form onSubmit={handleSubmit} encType='multipart/form-data' className='grid grid-cols-3 gap-4'>
                 <div className='col-span-1'>
                     <label htmlFor="name" className='block'>Name:</label>

@@ -8,6 +8,10 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 
 const Orders = () => {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const toggleDescription = (show) => {
+    setShowFullDescription(show);
+};
   const [order, setOrder] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -57,21 +61,36 @@ const Orders = () => {
               <Typography variant="h9" component="div">
                 Months: {(new Date(item.endDate).getMonth() + 1) - (new Date(item.startDate).getMonth() + 1)}
               </Typography>
-              <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
+              {!showFullDescription ? (
+                            <button
+                                className="text-blue-500 hover:underline"
+                                onClick={() => toggleDescription(true)}
+                            >
+                                See More
+                            </button>
+                        ) : (
+                            <button
+                                className="text-blue-500 hover:underline"
+                                onClick={() => toggleDescription(false)}
+                            >
+                                See Less
+                            </button>
+                        )}
+                        {showFullDescription && <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
                 Billboard ID: {item.billboard._id}
-              </Typography>
-              <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
+              </Typography>}
+              {showFullDescription && <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
                 Location: {item.billboard.name}
-              </Typography>
-              <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
+              </Typography>}
+            {  showFullDescription && <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
                 Description: {item.billboard.description}
-              </Typography>
-              <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
+              </Typography>}
+             { showFullDescription && <Typography color="text.secondary" sx={{ fontWeight: 'bold', color: '#333' }}>
                 City: {item.billboard.city}
-              </Typography>
-              <Typography sx={{ fontSize: 12, textWrap: 'nowrap', fontWeight: 'bold', color: '#333' }} color="text.secondary">
+              </Typography>}
+            {  showFullDescription &&  <Typography sx={{ fontSize: 12, textWrap: 'nowrap', fontWeight: 'bold', color: '#333' }} color="text.secondary">
                 Email: {item.user.email}
-              </Typography>
+              </Typography>}
             </CardContent>
             <CardActions className='flex justify-end'>
               <Button size="small" sx={{ backgroundColor: '#3f51b5', color: '#fff', borderRadius: '4px', '&:hover': { backgroundColor: '#303f9f' } }}>Confirm Order</Button>

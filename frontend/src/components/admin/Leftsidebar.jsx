@@ -20,7 +20,7 @@ const Leftsidebar = () => {
     };
 
     return (
-        <div className='min-h-[100vh]  bg-gray-800 text-white flex flex-col w-full md:w-[20%] gap-6 py-6 px-3 md:px-6'>
+        <div className='min-h-[100vh] w-500px  bg-gray-800 text-white flex flex-col w-full md:w-[20%] gap-6 py-6 px-3 md:px-6'>
             <Link className='p-3 text-lg font-semibold hover:text-blue-300 rounded-lg' to="/admindashboard">Dashboard</Link>
             <Link className='p-3 text-lg font-semibold hover:text-blue-300 rounded-lg' to="/admindashboard/Billboards">Billboards</Link>
             <Link className='p-3 text-lg font-semibold hover:text-blue-300 rounded-lg' to="/admindashboard/Analytics">Analytics</Link>
