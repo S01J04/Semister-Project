@@ -3,7 +3,8 @@ import { headerlefticons, headerrighticons } from './icons';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser, logout } from '../redux/userSlice';
 const DropdownList = ({ items, setHrefitem }) => {
   console.log(items)
   return (
@@ -18,10 +19,23 @@ const DropdownList = ({ items, setHrefitem }) => {
 };
 
 export default function Header() {
-
   const [getprovinces, setgetprovinces] = useState([]);
   const province = useSelector((state) => state.billboard);
-
+  const user = useSelector(store => store.user);
+  const dispatch=useDispatch()
+  const handlelogout= async(e)=>{
+    e.preventDefault();
+    try {
+       const res= await axios.get("http://localhost:3000/api/user/logout");
+        console.log(res)
+        if(res.data.success){
+         dispatch(logout()) 
+        }
+    } catch (error) {
+     console.log(error)
+    }
+}
+  console.log(user)
   useEffect(() => {
     const items = province.province.map((item) => item);
    
@@ -111,22 +125,30 @@ export default function Header() {
         </div>
         <div>
           <div className="hidden text-white space-x-2 lg:block">
-            <Link to={`/login`}>
-              <button
-                type="button"
-                className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                Sign In
-              </button>
-            </Link>
-            <Link to={`/register`}>
+          {user.user==null? <Link to={`/register`}>
               <button
                 type="button"
                 className="rounded-md px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
                 Register
               </button>
-            </Link>
+            </Link>:<span className=' rounded-[50%]  text-lg font-bold border bg-black border-black p-2 px-3'>{user.user.name[0].toUpperCase()}</span>} {user.user==null? <Link to={`/login`}>
+              <button
+                type="button"
+                className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Sign In
+              </button>
+            </Link>: <Link >
+              <button
+              onClick={handlelogout}
+                type="button"
+                className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Sign Out
+              </button>
+            </Link>}
+          
           </div>
         </div>
       </div>

@@ -128,6 +128,81 @@ export const searchbyCity = async (req, res) => {
     });
   }
 };
+export const confirmorder = async (req, res) => {
+  try {
+    const { billboard: { _id: billboardId } } = req.body;
+    console.log(billboardId)
+    // Find the existing billboard by ID
+    const existingBillboard = await Billboard.findById(billboardId);
+
+    // Check if the billboard exists
+    if (!existingBillboard) {
+      return res.status(404).json({
+        success: false,
+        error: 'Billboard not found'
+      });
+    }
+
+    // Update the availability to "booked"
+    existingBillboard.availability = "booked";
+
+    // Save the updated billboard
+    const updatedBillboard = await existingBillboard.save();
+
+    // Reload location if successful (Not recommended for API)
+    // location.reload(); // This is for browser reload, not applicable in API
+
+    return res.status(200).json({
+      success: true,
+      message: "Order booked successfully.",
+      billboard: updatedBillboard
+    });
+  } catch (error) {
+    console.error('Error getting billboards by city:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
+};
+export const cancelorder = async (req, res) => {
+  try {
+    const { billboard: { _id: billboardId },_id } = req.body;
+    console.log(billboardId)
+    // Find the existing billboard by ID
+    const existingBillboard = await Billboard.findById(billboardId);
+    const removeorder = await Order.findByIdAndDelete(_id);
+    // Check if the billboard exists
+    if (!existingBillboard) {
+      return res.status(404).json({
+        success: false,
+        error: 'Billboard not found'
+      });
+    }
+
+    // Update the availability to "booked"
+    existingBillboard.availability = "available";
+
+    // Save the updated billboard
+    const updatedBillboard = await existingBillboard.save();
+
+    // Reload location if successful (Not recommended for API)
+    // location.reload(); // This is for browser reload, not applicable in API
+
+    return res.status(200).json({
+      success: true,
+      message: "Order removed successfully.",
+      billboard: updatedBillboard
+    });
+  } catch (error) {
+    console.error('Error getting Order:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
+};
+
 
 
 export const updateBillboard = async (req, res) => {

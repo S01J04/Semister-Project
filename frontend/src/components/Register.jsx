@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { getUser } from '../redux/userSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const dispatch= useDispatch()
+  const navigate= useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-  });
+  }); 
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -27,7 +32,15 @@ const Register = () => {
       // Send form data to the backend
       const response = await axios.post('http://localhost:3000/api/user/register', formData);
       console.log(response.data); // Assuming the backend responds with a message
-	  if(response.data.success){
+      if(response.data.success){
+        const res = await axios.post('http://localhost:3000/api/user/login', {
+          email: formData.email,
+          password: formData.password
+        }); 
+        dispatch(getUser(res?.data?.user));
+        if (res.data) {
+          navigate('/');
+        }
 		setFormData({
         name: '',
         email: '',

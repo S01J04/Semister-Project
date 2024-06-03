@@ -116,8 +116,9 @@ const AdminProduct = (props) => {
                 </div>
                 <div
                     className={`gap-2 flex absolute top-1 font-bold pl-3 ${
-                        props.availability == "unavailable" ? "text-red-500" : "text-green-500"
-                    }`}
+    props.availability === "unavailable" ? "text-red-500" : props.availability === "booked" ? "text-blue-700" : "text-green-600"
+}`}
+
                 >
                     <span>{props.availability}</span>
                 </div>

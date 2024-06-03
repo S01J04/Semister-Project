@@ -33,6 +33,22 @@ const Orders = () => {
     };
     fetchOrder();
   }, []);
+  const handleorder=async(item)=>{
+    console.log(item)
+     const res= await axios.post("http://localhost:3000/api/order/confirmorder",item)
+     console.log(res.data)
+     if(res.data.success){
+
+     }
+  }
+  const handlecancelorder =async(item)=>{
+    console.log(item)
+     const res= await axios.post("http://localhost:3000/api/order/cancelorder",item)
+     console.log(res.data)
+     if(res.data.success){
+
+     }
+  }
 
   if (loading) return <div className="text-center mt-4">Loading...</div>; // Display loading message if data is still loading
   if (error) return <div className="text-center mt-4">{error}</div>; // Display error message if there's an error fetching data
@@ -93,7 +109,8 @@ const Orders = () => {
               </Typography>}
             </CardContent>
             <CardActions className='flex justify-end'>
-              <Button size="small" sx={{ backgroundColor: '#3f51b5', color: '#fff', borderRadius: '4px', '&:hover': { backgroundColor: '#303f9f' } }}>Confirm Order</Button>
+             {item.billboard.availability==="available"? <Button onClick={()=>handleorder(item)} size="small" sx={{ backgroundColor: '#3f51b5', color: '#fff', borderRadius: '4px', '&:hover': { backgroundColor: '#303f9f' } }}>Confirm Order</Button>:
+             <Button onClick={()=>handlecancelorder(item)} size="small" sx={{ backgroundColor: '#3f51b5', color: '#fff', borderRadius: '4px', '&:hover': { backgroundColor: '#303f9f' } }}>Cancel Order</Button> }
             </CardActions>
           </Card>
         </div>
