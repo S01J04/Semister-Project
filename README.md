@@ -4,10 +4,11 @@ Start Process
 - open both folders in separate terminals and type npm i
 - in backend terminal type npm start
 - in frontend terminal type npm run dev
-- also make an .env file and add your MONGO_URI="Your MONGO URI"
-PORT=3000 etc
+- also make an .env file and add your
+- MONGO_URI="Your MONGO URI"
+- PORT=3000 etc
+- TOKEN_SECRET="abcdefghijk"
 - You are good to go
-TOKEN_SECRET="abcdefghijk"
 # Shah Advertizing - Taking Offline Billboard Advertising Online
 
 ## Introduction
