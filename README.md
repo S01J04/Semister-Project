@@ -1,5 +1,13 @@
 ---
-
+Start Process
+- unzip rar file and open in VS-CODE
+- open both folders in separate terminals and type npm i
+- in backend terminal type npm start
+- in frontend terminal type npm run dev
+- also make an .env file and add your MONGO_URI="Your MONGO URI"
+PORT=3000 etc
+- You are good to go
+TOKEN_SECRET="abcdefghijk"
 # Shah Advertizing - Taking Offline Billboard Advertising Online
 
 ## Introduction
