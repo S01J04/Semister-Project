@@ -7,7 +7,12 @@ import billboardRoutes from './routes/billboardRoutes.js';
 import adminRoute from './routes/adminRoute.js';
 import orderRoute from './routes/orderRoute.js';
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from 'url';
 
+// Create the equivalent of __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config({ path: ".env" });
 databaseConnection();
 
@@ -20,7 +25,7 @@ app.use(cookieParser());
 app.use('/uploads',express.static('uploads'))
 // Configure CORS
 app.use(cors({
-  origin: "http://localhost:5173", // Allow requests from this origin
+  origin: "*", // Allow requests from this origin
   credentials: true // Allow credentials (cookies, authorization headers, etc.)
 }));
 
@@ -29,6 +34,7 @@ app.use("/api/user", userRoute);
 app.use("/api/billboards", billboardRoutes);
 app.use("/api/adminpage",adminRoute);
 app.use("/api/order",orderRoute);
+app.use(express.static(path.join(__dirname, "../FRONTEND/dist")));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening at port ${process.env.PORT}`);

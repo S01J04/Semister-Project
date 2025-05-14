@@ -9,7 +9,7 @@ const DropdownList = ({ items, setHrefitem }) => {
   console.log(items)
   return (
     <ul className="absolute sm:w-[120%] sm:top-full top-20 w-[40%] left-[200px] sm:left-0 z-10 bg-gray-200 shadow-lg">
-      {items.items.map((item) => (
+      {items?.items?.map((item) => (
         <li key={item} className="px-4 text-start border-b border-gray-300 py-3 text-gray-400 hover:bg-gray-100">
           <Link to={items.href + item} className="text-gray-500 text-sm"> {item}</Link>
         </li>
@@ -37,7 +37,7 @@ export default function Header() {
 }
   console.log(user)
   useEffect(() => {
-    const items = province.province.map((item) => item);
+    const items = province?.province?.map((item) => item);
    
     setgetprovinces(items);
   }, []);
@@ -90,7 +90,7 @@ export default function Header() {
       <div className="firstheader bg-blue-800 h-[30px] flex justify-between px-9 items-center text-white font-semibold">
         <div className="left flex">
           <div className="header-left-icons flex">
-            {headerlefticons.map((item, index) => (
+            {headerlefticons?.map((item, index) => (
               <div key={index} className='flex mx-3 items-center'>
                 {React.createElement(item.icon, {
                   size: item.size,
@@ -102,7 +102,7 @@ export default function Header() {
           </div>
         </div>
         <div className="right flex">
-          {headerrighticons.map((item, index) => (
+          {headerrighticons?.map((item, index) => (
             <div key={index} className="icon-container px-2 cursor-pointer">
               {React.createElement(item.icon, {
                 size: item.size,
@@ -156,7 +156,7 @@ export default function Header() {
         <div className="mx-auto flex h-full items-center justify-between px-4 ">
           <div className="hidden w-[100vw] h-full items-start sm:flex">
             <ul className="flex items-center h-full justify-center w-full relative">
-              {menuItems.map((item) => (
+              {menuItems?.map((item) => (
                 item.itemstoggle ?(
                   <li
                     onMouseEnter={item.onMouseEnter}
@@ -211,7 +211,7 @@ export default function Header() {
                   </div>
                   <div className="mt-6">
                     <nav className="grid gap-y-4">
-                      {menuItems.map((item) => (
+                      {menuItems?.map((item) => (
                         item.itemstoggle && (
                           <li
                             onMouseEnter={item.onMouseEnter}

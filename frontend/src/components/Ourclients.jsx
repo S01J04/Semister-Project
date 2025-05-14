@@ -9,7 +9,7 @@ const Ourclients = () => {
           <img
             src="https://logomak.com/blog/wp-content/uploads/2023/09/Starbucks-logo-500x281-min.png"
             className='h-full w-[130px] object-cover mix-blend-multiply hover:scale-110 transform transition-transform duration-300'
-            alt=""cc
+            alt="Starbucks logo"
           />
         </div>
         <div className='h-[130px] bg-transparent cursor-pointer'>
@@ -17,7 +17,7 @@ const Ourclients = () => {
             src="https://s3.amazonaws.com/cdn.designcrowd.com/blog/100-Famous-Brand%20Logos-From-The-Most-Valuable-Companies-of-2020/Adidas.png"
             className='h-full w-[130px] object-cover mix-blend-multiply hover:scale-110 transform transition-transform duration-300'
             alt=""
-          />  
+          />
         </div>
         <div className='h-[130px] bg-transparent cursor-pointer '>
           <img src="https://www.zarla.com/images/mcdonalds-logo-2400x2400-20220519.png?crop=1:1,smart&width=150&dpr=2" className='h-full w-[130px] object-cover mix-blend-multiply hover:scale-110 transform transition-transform duration-300' alt="" />
