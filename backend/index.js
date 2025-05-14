@@ -8,11 +8,6 @@ import adminRoute from './routes/adminRoute.js';
 import orderRoute from './routes/orderRoute.js';
 import cors from "cors";
 import path from "path";
-import { fileURLToPath } from 'url';
-
-// Create the equivalent of __dirname for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 dotenv.config({ path: ".env" });
 databaseConnection();
 
@@ -34,8 +29,13 @@ app.use("/api/user", userRoute);
 app.use("/api/billboards", billboardRoutes);
 app.use("/api/adminpage",adminRoute);
 app.use("/api/order",orderRoute);
-app.use(express.static(path.join(__dirname, "../FRONTEND/dist")));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server listening at port ${process.env.PORT}`);
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
+
+app.listen(3000, () => {
+  console.log(`Server listening at port ${3000}`);
 });
