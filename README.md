@@ -1,5 +1,14 @@
 ---
-
+Start Process
+- unzip rar file and open in VS-CODE
+- open both folders in separate terminals and type npm i
+- in backend terminal type npm start
+- in frontend terminal type npm run dev
+- also make an .env file and add your
+- MONGO_URI="Your MONGO URI"
+- PORT=3000 etc
+- TOKEN_SECRET="abcdefghijk"
+- You are good to go
 # Shah Advertizing - Taking Offline Billboard Advertising Online
 
 ## Introduction
@@ -27,6 +36,21 @@ Our vision is to seamlessly blend our offline billboard advertising expertise wi
 - **Search Engine Marketing:** Pay-per-click advertising on search engines like Google and Bing to capture users actively searching for products or services.
   
 - **Content Marketing:** Creating valuable, relevant content to attract and engage customers, enhancing brand awareness and credibility.
+![screencapture-localhost-5173-2024-06-24-03_57_34](https://github.com/S01J04/Semister-Project/assets/139046266/34478708-fc8b-4b9c-ae4a-4ddfba4fba72)
+![screencapture-localhost-5173-login-2024-06-24-04_00_52](https://github.com/S01J04/Semister-Project/assets/139046266/9f180580-6831-4918-ba02-08058c4d14f4)
+![screencapture-localhost-5173-register-2024-06-24-04_01_24](https://github.com/S01J04/Semister-Project/assets/139046266/024cd390-11bc-4a4e-9087-0d5a7ab32c5c)
+
+![screencapture-localhost-5173-search-results-Khyber-Pakhtunkhwa-2024-06-24-03_58_54](https://github.com/S01J04/Semister-Project/assets/139046266/8a932a1a-6c88-42fe-bd6e-2c01f1267561)
+![screencapture-localhost-5173-billboards-664b9e45b86d40d3e3e01b63-2024-06-24-03_59_22](https://github.com/S01J04/Semister-Project/assets/139046266/8af51d92-eecd-4d5d-aeb2-5bdb1983c548)
+![screencapture-localhost-5173-about-2024-06-24-04_00_00](https://github.com/S01J04/Semister-Project/assets/139046266/599a77e9-1680-4a3f-a69c-fb8002d0c7ff)
+![screencapture-localhost-5173-contact-2024-06-24-04_00_25](https://github.com/S01J04/Semister-Project/assets/139046266/43ff0615-7b39-4680-a436-55c323c7a80d)
+ADMIN DASHBOARD
+![screencapture-localhost-5173-adminlogin-2024-06-24-04_02_09](https://github.com/S01J04/Semister-Project/assets/139046266/cab48589-e75a-4c59-a0a1-edc0bcb5eb89)
+![screencapture-localhost-5173-admindashboard-2024-06-24-04_02_57](https://github.com/S01J04/Semister-Project/assets/139046266/bda3fa4e-419e-4d3e-b395-5eef92f37396)
+![screencapture-localhost-5173-admindashboard-Billboards-2024-06-24-04_03_26](https://github.com/S01J04/Semister-Project/assets/139046266/22c62475-2388-4772-a156-9cf2b3614477)
+![screencapture-localhost-5173-admindashboard-orders-2024-06-24-04_04_21](https://github.com/S01J04/Semister-Project/assets/139046266/5ca85835-85aa-4e05-90bc-d9f74da99cf1)
+![screencapture-localhost-5173-admindashboard-users-2024-06-24-04_04_51](https://github.com/S01J04/Semister-Project/assets/139046266/3e605fd8-712b-4391-94c5-b38779846038)
+
 
 ## Conclusion
 
