@@ -136,11 +136,11 @@ const BillboardPage = ({ props }) => {
   </div>
 </div>
 
-          <div className="mt-4 px-7 flex flex-col gap-2 border border-blue-700 bg-gray-200 bg-gray-200 p-2 rounded">
+          <div className="mt-4   px-7 flex flex-col gap-2 border border-blue-700 bg-gray-200 bg-gray-200 p-2 rounded">
             <div className="font-bold">Address</div>
-            <div className="grid grid-cols-2  gap-4">
-              <div >
-                <div className='text-nowrap'>{props.locationDescription}, {props.city} ,Pakistan</div>
+            <div className="grid grid-cols-2   gap-4">
+              <div className=' w-[650px]' >
+                <div className=' '>{props.locationDescription}, {props.city} ,Pakistan</div>
               </div>
             </div>
 
